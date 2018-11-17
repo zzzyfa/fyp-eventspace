@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="contact-page">
         <div class="container">
-            <div style="text-align: center">
+            <div style="text-align: center; margin-top:100px">
                 <h2>Login</h2>
 
             </div>
@@ -39,8 +39,11 @@
                     <div class="col-sm-3"></div>
                 </div>
             </div>
+            
+
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
             
+
             
             <!--/.row-->
         </div>

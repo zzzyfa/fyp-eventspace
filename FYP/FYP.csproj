@@ -72,6 +72,8 @@
     <Content Include="App_Data\FYP_log.ldf">
       <DependentUpon>FYP.mdf</DependentUpon>
     </Content>
+    <Content Include="css\home.css" />
+    <Content Include="datepicker.aspx" />
     <Content Include="default\404.html" />
     <Content Include="default\about.html" />
     <Content Include="default\contact.html" />
@@ -98,6 +100,7 @@
     <Content Include="EO_ViewReports.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="images\ab.png" />
+    <Content Include="images\apu_bg.jpg" />
     <Content Include="images\banner1.jpg" />
     <Content Include="images\banner2.jpg" />
     <Content Include="images\banner3.jpg" />
@@ -149,6 +152,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="datepicker.aspx.cs">
+      <DependentUpon>datepicker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="datepicker.aspx.designer.cs">
+      <DependentUpon>datepicker.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EO_Create.aspx.cs">
       <DependentUpon>EO_Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,15 +1,63 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EO_ViewReports.aspx.cs" Inherits="FYP.EO_ViewReports" %>
+﻿<%@ Page Language="C#" MasterPageFile="User.master" AutoEventWireup="true" CodeFile="EO_ViewReports.aspx.cs" Inherits="FYP.EO_ViewReports" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+    <title>View Event Reports | SoftwareBiz</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .overauto {
+            overflow-x: auto;
+        }
+    </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container">
+        <div class="center" style="margin-top: 130px">
+            <h2>Event Sales Reports</h2>
         </div>
-    </form>
-</body>
-</html>
+        <hr />
+        <div class="col-sm-12 overauto">
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting" OnRowCommand="GridView2_RowCommand">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:BoundField DataField="event_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" HeaderStyle-Font-Underline="true" />
+
+                    <asp:BoundField DataField="event_group" HeaderText="Org Group" SortExpression="event_group" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_price" HeaderText="Price" SortExpression="event_price" HeaderStyle-Font-Underline="true" />
+                    <%--tickets sold 
+                        btnfield with count as backend and it will show div/popup that shows how many tickets sold
+                        --%>
+
+                    <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Report" Text="View" />
+                </Columns>
+                 <RowStyle BackColor="#EFF3FB" />
+                 <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            </asp:GridView>
+        </div>
+    </div>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)" OnSelecting="SqlDataSource1_Selecting">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <br />
+    <br />
+    <div class="col-sm-3"></div>
+</asp:Content>

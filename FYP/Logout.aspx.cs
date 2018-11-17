@@ -15,20 +15,20 @@ namespace FYP
             {
                 ViewState["PreviousPage"] = Request.UrlReferrer;//Saves the Previous page url in ViewState
             }
-            if (Session["userid"] != null)
+            //if (Session["userid"] != null)
+            //{
+            Session.Abandon();
+            if (ViewState["PreviousPage"] != null)  //Check if the ViewState 
+                                                    //contains Previous page URL
             {
-                Session.Abandon();
-                if (ViewState["PreviousPage"] != null)  //Check if the ViewState 
-                                                        //contains Previous page URL
-                {
-                    Response.Redirect(ViewState["PreviousPage"].ToString());//Redirect to 
-                                                                            //Previous page by retrieving the PreviousPage Url from ViewState.
-                }
-                else
-                {
-                    Response.Redirect("Home.aspx");
-                }
+                Response.Redirect(ViewState["PreviousPage"].ToString());//Redirect to 
+                                                                        //Previous page by retrieving the PreviousPage Url from ViewState.
             }
+            else
+            {
+                Response.Redirect("P_Home.aspx");
+            }
+            //}
         }
     }
 }

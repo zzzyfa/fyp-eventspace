@@ -20,20 +20,20 @@
 
                         <div class="form-group">
                             <label>Card Number:</label>
-                            <asp:TextBox ID="txtUsername" runat="server" class="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtUsername"></asp:RequiredFieldValidator><br />
+                            <asp:TextBox ID="txtCardNo" runat="server" class="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtCardNo"></asp:RequiredFieldValidator><br />
                             
                         </div>
                         <div class="form-group">
                             <label>Expiry Date:</label>
-                            <asp:TextBox ID="txtPassword" runat="server" class="form-control" TextMode="Password"></asp:TextBox>
+                            <asp:TextBox ID="txtPassword" runat="server" class="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
 
                         </div>
                        <div class="form-group">
                             <label>CVV:</label>
-                            <asp:TextBox ID="TextBox1" runat="server" class="form-control" TextMode="Password"></asp:TextBox>
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="This field is required." ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="TextBox1" runat="server" class="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="This field is required." ControlToValidate="TextBox1"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
                             <asp:Button ID="btnProceed" runat="server" Text="Proceed" class="btn btn-primary btn-lg" OnClick="btnProceed_Click" />

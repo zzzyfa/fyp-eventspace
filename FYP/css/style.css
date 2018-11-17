@@ -117,7 +117,8 @@ label {
 }
 
 .dropdown-menu>li>a {
-    display: block;
+    /*display: block;*/
+    display: none;
     padding: 10px 20px;
     clear: both;
     font-weight: normal;
@@ -2069,6 +2070,7 @@ p.copy-right a:hover {
     }
 }
 /*--//responsive--*/
+
 
 
 /* --- portfolio --- */

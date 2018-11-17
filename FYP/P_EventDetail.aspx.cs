@@ -12,9 +12,23 @@ namespace FYP
     public partial class P_EventDetail : System.Web.UI.Page
     {
         public String custID;
+        public String free = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string prodID = Request.QueryString["id"];
+            
+            string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(constr);
+            conn.Open();
+            SqlCommand cm = new SqlCommand("SELECT * FROM EVENTS_CREATED WHERE event_id=" + prodID, conn);
+            SqlDataReader sdr = cm.ExecuteReader();
+            while (sdr.Read())
+            {
+                
+                free = sdr["event_free"].ToString();
+                
+            }
+            
         }
 
         protected void btnCheckout_Click(object sender, EventArgs e)

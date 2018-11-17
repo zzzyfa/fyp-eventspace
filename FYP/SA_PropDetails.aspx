@@ -40,25 +40,16 @@
                        <asp:TextBox ID="txtCategory" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                         
                     </div>
-
-
-
-                   
                         <div class="form-group">
                             <label>Start Date:</label>
                             <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
                         </div>
-
-                    
 
                         <div class="form-group">
                             <label>End Date:</label>
                             <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
                         </div>
                     
-
-                  
-
                     <div class="form-group">
                         <label>Start Time:</label>
                         <asp:TextBox ID="txtStartTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
@@ -69,10 +60,6 @@
                         <asp:TextBox ID="txtEndTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator10" runat="server" ErrorMessage="This field is required." ControlToValidate="txtEndTime"></asp:RequiredFieldValidator><br />
                     </div>
-
-
-
-
 
                     <div class="form-group">
                         <label>Venue:</label>

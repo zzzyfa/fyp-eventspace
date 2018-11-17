@@ -2,9 +2,10 @@
 
 <!DOCTYPE html>
 
+
 <html>
 <head runat="server">
-    <title>FYP</title>
+    
 
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
     </script>
     <!--//tags -->
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
@@ -28,11 +30,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style type="text/css">
+        .dropdown:hover .dropdown-menu {display: block;}
+
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form2" runat="server">
         <header>
             <div class="top_header" id="home">
                 <!-- Fixed navbar -->
@@ -47,34 +59,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span class="icon-bar"></span>
                             </button>
                             <div class="logo-w3layouts-agileits">
-                                <h1><a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i>Conceit <span class="desc">For your Business</span></a></h1>
+                                <h1><a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i>  EventSpace <span class="desc" style="margin-top:5px">  APU Events Portal</span></a></h1>
                             </div>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <div class="nav_right_top">
-
-                                <ul class="nav navbar-nav">
-                                    <li class="active"><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <% if (Session["userid"] != null)
-                                        { %>
-                                    <li class="dropdown">
+                               
+                               <ul class="nav navbar-nav">
+                                    <li class="active"><a href="SA_Home.aspx">Home</a></li>
+                                    <li><a href="AboutUs.aspx">About</a></li>
+                                    <%--<li><a href="SA_ViewProposals.aspx">Event Proposals</a></li>--%>
+                                   <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Event Proposals<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="portfolio.html">Pending Proposals</a></li>
-                                            <li><a href="404.html">Approved Proposals</a></li>
-                                            <li><a href="404.html">Rejected Proposals</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=all">All Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=pending">Pending Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=approved">Approved Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=rejected">Rejected Reports</a></li>
+                                            
                                         </ul>
                                     </li>
+                                   
                                     <li role="presentation"><a href="Logout.aspx">Logout</a></li>
-                                    <asp:Label runat="server" ID="lblUser"></asp:Label>
-
-                                    <% }
-                                        else
-                                        {
-                                    %>
-                                    { Response.Redirect("Home.aspx"); }
-                                    <% } %>
+                                    <asp:Label runat="server" ID="Label1"></asp:Label>
                                 </ul>
                             </div>
                         </div>
@@ -83,12 +90,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </nav>
             </div>
         </header>
-        <div style="margin-top: 150px">
+        <div style="margin-top: 40px">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
         <!-- footer -->
-        <div class="footer" style="height: 450px">
+        <div class="footer" style="height: 450px;left:0;bottom:0;width:100%">
             <div class="footer_inner_info_w3ls_agileits">
                 <div class="col-md-3 footer-left">
                     <h2><a href="index.html"><i class="fa fa-clone" aria-hidden="true"></i>Conceit </a></h2>

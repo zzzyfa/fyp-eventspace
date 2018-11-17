@@ -19,18 +19,22 @@ namespace FYP
                 custID = getUserID(Session["userid"].ToString());
 
             }
+            else
+            {
+                Response.Redirect("P_Home.aspx");
+            }
         }
         public static string getUserID(String userEmail)
         {
             String userID = "NULL";
-            String query = "Select * from users where email= '" + userEmail + "'";
+            String query = "Select * from users where user_username= '" + userEmail + "'";
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
             SqlCommand cm = new SqlCommand(query, conn);
             SqlDataReader sdr = cm.ExecuteReader();
             while (sdr.Read())
             {
-                userID = sdr["userID"].ToString();
+                userID = sdr["user_id"].ToString();
             }
 
             return userID;

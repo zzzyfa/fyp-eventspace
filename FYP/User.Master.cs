@@ -11,30 +11,46 @@ namespace FYP
 {
     public partial class Participants : System.Web.UI.MasterPage
     {
-        public String custID;
+        public String custID = "";
+        public String custOccu = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] != null)
             {
                 custID = getUserID(Session["userid"].ToString());
+                custOccu = getUserOccu(Session["userid"].ToString());
 
             }
         }
-        public static string getUserID(String userEmail)
+        public static string getUserID(String username)
         {
             String userID = "NULL";
-            String query = "Select * from users where email= '" + userEmail + "'";
+            String query = "Select user_id from users where user_username= '" + username + "'";
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
             SqlCommand cm = new SqlCommand(query, conn);
             SqlDataReader sdr = cm.ExecuteReader();
             while (sdr.Read())
             {
-                userID = sdr["userID"].ToString();
+                userID = sdr["user_id"].ToString();
             }
 
             return userID;
         }
+        public static string getUserOccu(String username)
+        {
+            String userOccu = "NULL";
+            String query = "Select user_occupation from users where user_username= '" + username + "'";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            SqlCommand cm = new SqlCommand(query, conn);
+            SqlDataReader sdr = cm.ExecuteReader();
+            while (sdr.Read())
+            {
+                userOccu = sdr["user_occupation"].ToString();
+            }
+
+            return userOccu;
         }
     }
 }

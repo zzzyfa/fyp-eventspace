@@ -13,5 +13,11 @@ namespace FYP
         {
 
         }
+
+        protected void btnPurchHist_Click(object sender, EventArgs e)
+        {
+            string custID = Request.QueryString["custid"];
+            Response.Redirect("P_PurchHist.aspx?custid="+custID);
+        }
     }
 }

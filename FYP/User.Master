@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.Master.cs" Inherits="FYP.Participants" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="User.Master.cs" Inherits="FYP.Participants" %>
 
 <!DOCTYPE html>
 
@@ -29,6 +29,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+         <style type="text/css">
+        .dropdown:hover .dropdown-menu {display: block;}
+
+    </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -56,24 +66,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                
                                 <ul class="nav navbar-nav">
                                     <li class="active"><a href="P_Home.aspx">Home</a></li>
-                                    <li><a href="P_About.aspx">About</a></li>
+                                    <li><a href="AboutUs.aspx">About</a></li>
                                     <li><a href="P_Browse.aspx">Events</a></li>
-                                     <% if (Session["userid"] != null)
-                                        { %>
+                                     <% if (Session["userid"] != null) 
+                                            
+                                        { 
+                                             %>
                                      <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AS ORGANISER<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="EO_Create.aspx">Create Event</a></li>
-                                            <li><a href="EO_ViewEvents.aspx">Submitted Events</a></li>
-                                            <li><a href="EO_ViewReports.aspx">Sales Reports</a></li>
-                                            <li><a href="EO_Notify.aspx">Notify</a></li>
+                                            <li><a href="EO_Create.aspx?custid=<%=custID %>">Create Event</a></li>
+                                            <li><a href="EO_ViewEvents.aspx?custid=<%=custID %>">Submitted Events</a></li>
+                                            <li><a href="EO_ViewReports.aspx?custid=<%=custID %>">Sales Reports</a></li>
+                                            <li><a href="EO_Notify.aspx?custid=<%=custID %>">Notify</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="images/user_icon.png" style="height:20px; width:20px"/><span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="P_UpdateProfile.aspx">Update Profile</a></li>
-                                            <li><a href="P_PurchHist.aspx">Purchase History</a></li>
+                                            <li><a href="P_UpdateProfile.aspx?custid=<%=custID %>">Update Profile</a></li>
+                                            
+                                            <li><a href="P_PurchHist.aspx?custid=<%=custID %>">Purchase History</a></li>
                                         </ul>
                                     </li>
                                     <li role="presentation"><a href="Logout.aspx">Logout</a></li>
@@ -98,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </asp:ContentPlaceHolder>
         </div>
         <!-- footer -->
-        <div class="footer" style="height: 450px">
+        <div class="footer" style="height: 450px;left:0;bottom:0;width:100%">
             <div class="footer_inner_info_w3ls_agileits">
                 <div class="col-md-3 footer-left">
                     <h2><a href="index.html"><i class="fa fa-clone" aria-hidden="true"></i>Conceit </a></h2>
