@@ -3,14 +3,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Event Catalogue | SoftwareBiz</title>
     <%--<link href="css/style.css" rel="stylesheet" />--%>
+    <style type="text/css">
+
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <asp:HiddenField ID="HiddenField1" runat="server" Value="approved" />
-    <asp:HiddenField ID="HiddenField2" runat="server" Value="ALL" />
-    <div class="banner_bottom">
-        <div class="container">
+    <asp:HiddenField ID="HiddenField2" runat="server" Value="all" />
+    <%--<div class="banner_bottom">--%>
+        <div class="container" style="margin-top:130px; margin-bottom:50px">
+
             <h3 class="tittle-w3ls">Events</h3>
             <div class="inner_sec_info_wthree_agile">
                 <!--/projects-->
@@ -38,8 +42,13 @@
                         <a href="#" title="Category 4">Category 4</a>
                     </li>--%>
                 </ul>
+                <%--<hr />--%>
+                <hr style="height:0.5px; color:lightgrey; background-color:lightgrey" />
+                <asp:TextBox ID="txtSearch" runat="server" class="form-control" placeholder="Enter event name..."></asp:TextBox>
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary btn-lg" OnClick="btnSearch_Click" />
                 <ul class="portfolio-area" style="margin-top: 50px">
-                    <%if (Session["userid"] != null)
+                    
+                   <%-- <%if (Session["userid"] != null)
                         { %>
                     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
                         <LayoutTemplate>
@@ -50,10 +59,10 @@
                         <ItemTemplate>
 
                             <li class="portfolio-item2" data-id="id-7" data-type="<%#Eval("event_category") %>">
-                                <div>
+                                <div style="height:300px">
                                     <span class="image-block block2">
-                                        <img src="upload/<%# Eval("event_poster")%>" class="img-responsive" height="150" width="150" alt="Conceit">
-                                        <div class="port-info">
+                                        <img src="upload/<%# Eval("event_poster")%>"  width="300" height="200" alt="Conceit">
+                                        <div class="port-info" style="width:300px">
                                             <h5><a href="P_EventDetail.aspx?id=<%# Eval("event_id") %>"><%# Eval("event_name")%></a></h5>
                                             <p><%# Eval("event_start_date")%> - <%# Eval("event_end_date")%></p>
                                             <p><%# Eval("event_start_time")%> - <%# Eval("event_end_time")%></p>
@@ -68,7 +77,7 @@
                     </asp:ListView>
                     <%}
                     else
-                    { %>
+                    { %>--%>
                     <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource2">
                         <LayoutTemplate>
                             <div id="itemPlaceHolderContainer" runat="server">
@@ -78,23 +87,24 @@
                         <ItemTemplate>
 
                             <li class="portfolio-item2" data-id="id-7" data-type="<%#Eval("event_category") %>">
-                                <div>
-                                    <span class="image-block block2">
-                                        <img src="upload/<%# Eval("event_poster")%>" class="img-responsive" height="150" width="150" alt="Conceit">
-                                        <div class="port-info">
+                                <div style="height:300px; margin-bottom:40px;">
+                                    <span class="image-block block2" style="margin-right:100px">
+                                        <img src="upload/<%# Eval("event_poster")%>"  height="200" width="300" alt="Conceit">
+                                        <div class="port-info" style="width:100%; margin-right:50px">
                                             <h5><a href="P_EventDetail.aspx?id=<%# Eval("event_id") %>"><%# Eval("event_name")%></a></h5>
-                                            <p><%# Eval("event_start_date")%> - <%# Eval("event_end_date")%></p>
-                                            <p><%# Eval("event_start_time")%> - <%# Eval("event_end_time")%></p>
+                                            <p><%# Eval("event_start_date")%> - <%# Eval("event_end_date")%><br />
+                                            <%# Eval("event_start_time")%> - <%# Eval("event_end_time")%><br />
+                                            <%# Eval("event_venue") %></p>
                                         </div>
                                         </a>
                                     </span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </div>
                             </li>
 
                         </ItemTemplate>
                     </asp:ListView>
-                    <%} %>
+                    <%--<%} %>--%>
                 </ul>
 
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE (([event_eligibility] = @event_eligibility) OR ( [event_eligibility] = @event_eligibility2) AND ([event_status] = @event_status))">
@@ -119,5 +129,5 @@
         </div>
         <!--//projects-->
 
-    </div>
+    <%--</div>--%>
 </asp:Content>

@@ -31,6 +31,9 @@
                                 <span id="itemPlaceHolder" runat="server" />
                             </div>
                         </LayoutTemplate>
+            <EmptyDataTemplate>
+                <h2>Event Proposals :  <span style="color:orangered; font-weight:bold"> <% =v %> </span></h2>
+            </EmptyDataTemplate>
                         <ItemTemplate>
                   <h2>Event Proposals : <span style="color:orangered; font-weight:bold">  <%#Eval("event_status") %></span></h2>
                             </ItemTemplate>
@@ -50,7 +53,7 @@
             <asp:Button ID="btnOk" runat="server" Text="Ok" class="btn btn-primary btn-lg" OnClick="btnOk_Click" />
                     </div>--%>
         <div class="col-sm-12 overauto">
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive" CellPadding="4" DataKeyNames="event_id" Font-Names="Arial" Font-Size="Medium" ForeColor="#333333" GridLines="None"  AllowPaging="True" AllowSorting="true"  DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive" CellPadding="4" DataKeyNames="event_id" Font-Names="Arial" Font-Size="Medium" ForeColor="#333333" GridLines="None"  AllowPaging="True" AllowSorting="true"  DataSourceID="SqlDataSource1"  OnRowCommand="GridView2_RowCommand">
                             
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
@@ -64,7 +67,7 @@
                                 <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_status" HeaderText="Status" SortExpression="event_status" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_comments" HeaderText="Comments" SortExpression="event_comments" HeaderStyle-Font-Underline="true" />
-                                <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Details" Text="View"  />
+                                <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Details" Text="View" ControlStyle-CssClass="btn btn-primary" HeaderStyle-Font-Underline="true"   />
                             </Columns>
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -82,21 +85,15 @@
                         </asp:GridView>
                     </div>
                 </div>
-    <%String status = Request.QueryString["status"];
-        if (status == "all")
-        {%>
+    
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([event_status] = @event_status2)">
         <SelectParameters>
             
             <asp:QueryStringParameter Name="event_status2" QueryStringField="status" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <%}
-    else
-    { %>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED]">
-    </asp:SqlDataSource>
-    <%} %>
+
+    
     <br />
     <br />
 <div class="col-sm-3"></div>

@@ -8,22 +8,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section id="contact-page">
         <div class="container">
-            <div style="text-align: center">
+            <div style="text-align: center; margin-top: 130px">
                 <asp:HiddenField ID="HiddenField_Id1" runat="server" />
                 <h2>Registration</h2>
 
             </div>
-            <br />
-            <br />
+           
+            
             <div class="row contact-wrap">
                 <div class="status alert alert-success" style="display: none"></div>
                 <div id="main-contact-form" class="contact-form">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
-
+                         <hr style="height:0.7px; color:lightgrey; background-color:lightgrey" />
                         <div class="form-group">
                             <label>Name:</label>
-                            <asp:TextBox ID="txtName" runat="server" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtName"></asp:RequiredFieldValidator><br />
 
                         </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label>Email:</label>
-                            <asp:TextBox ID="txtEmail" runat="server" class="form-control" ></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="This field is required." ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
 
                         </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
-
+            <asp:HiddenField ID="HiddenField1" runat="server" />
 
             <!--/.row-->
         </div>

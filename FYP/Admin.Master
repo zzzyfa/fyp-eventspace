@@ -67,15 +67,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                
                                <ul class="nav navbar-nav">
                                     <li class="active"><a href="SA_Home.aspx">Home</a></li>
-                                    <li><a href="AboutUs.aspx">About</a></li>
+                                    
                                     <%--<li><a href="SA_ViewProposals.aspx">Event Proposals</a></li>--%>
                                    <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Event Proposals<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="SA_ViewProposals.aspx?status=all">All Events</a></li>
-                                            <li><a href="SA_ViewProposals.aspx?status=pending">Pending Events</a></li>
-                                            <li><a href="SA_ViewProposals.aspx?status=approved">Approved Events</a></li>
-                                            <li><a href="SA_ViewProposals.aspx?status=rejected">Rejected Reports</a></li>
+                                            <li><a href="SA_ViewPropsAll.aspx">All Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=Pending">Pending Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=Approved">Approved Events</a></li>
+                                            <li><a href="SA_ViewProposals.aspx?status=Rejected">Rejected Reports</a></li>
                                             
                                         </ul>
                                     </li>

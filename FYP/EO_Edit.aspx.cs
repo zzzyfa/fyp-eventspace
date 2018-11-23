@@ -16,10 +16,15 @@ namespace FYP
     {
         private object item_name;
         public string image = "";
+        public String custID = "";
         public object HiddenField_Id { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else if (!IsPostBack)
             {
                 try
                 {
@@ -58,6 +63,7 @@ namespace FYP
                                         string item_price = row["event_price"].ToString();
                                         string item_description = row["event_description"].ToString();
                                         image = row["event_poster"].ToString();
+                                        
 
                                         this.HiddenField_Id1.Value = itemid;
                                         this.txtOrgClub.Text = group;
@@ -74,6 +80,16 @@ namespace FYP
                                         this.txtRegClose.Text = reg_close;
                                         this.txtResources.Text = resources;
                                         this.txtRemarks.Text = remarks;
+                                        if (free == "Y")
+                                        {
+                                            chkFree.Checked = true;
+                                            panelPrice.Visible = false;
+                                        }
+                                        else
+                                        {
+                                            chkFree.Checked = false;
+                                            panelPrice.Visible = true;
+                                        }
 
                                         //drlEligibility.SelectedValue = drlEligibility.Items.FindByText(row["event_eligibility"].ToString()).Value;
                                         drlEligibility.SelectedValue = row["event_eligibility"].ToString();
@@ -92,9 +108,20 @@ namespace FYP
             }
         }
 
+        protected void chkFree_CheckedChanged(object sender, EventArgs e)
+        {
 
+            if (chkFree.Checked == true)
+            {
+                panelPrice.Visible = false;
+            }
+
+            else { panelPrice.Visible = true; }
+        }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            int free = 0;
+
             System.Diagnostics.Debug.WriteLine("Test1");
             SqlConnection con = new
         SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -103,47 +130,128 @@ namespace FYP
             {
                 System.Diagnostics.Debug.WriteLine("Test3");
                 con.Open();
-                string file_name = uploadPic.FileName.ToString() + "";
-                uploadPic.PostedFile.SaveAs(Server.MapPath("~/upload/") + file_name);
-                string query = "UPDATE EVENTS_CREATED SET event_category=@event_category,event_venue=@event_venue, event_poster=@event_poster, event_formal_descr=@event_formal_descr, " +
-                                "event_description=@event_description, event_price=@event_price, event_eligibility=@event_eligibility, event_no_of_participants=@event_no_of_participants, " +
-                                "event_reg_closing_date=@event_reg_closing_date, event_resources=@event_resources, event_remarks=@event_remarks WHERE event_id=@itemid";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@itemid", HiddenField_Id1.Value.ToString());
-                cmd.Parameters.AddWithValue("@event_group", txtOrgClub.Text);
-                cmd.Parameters.AddWithValue("@event_name", txtName.Text);
-                cmd.Parameters.AddWithValue("@event_category", drlCategory.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@event_start_date", txtStartDate.Text);
-                cmd.Parameters.AddWithValue("@event_end_date", txtEndDate.Text);
-                cmd.Parameters.AddWithValue("@event_start_time", txtStartTime.Text);
-                cmd.Parameters.AddWithValue("@event_end_time", txtEndTime.Text);
-                cmd.Parameters.AddWithValue("@event_venue", txtVenue.Text);
-                cmd.Parameters.AddWithValue("@event_formal_descr", txtFormalDesc.Text);
-                cmd.Parameters.AddWithValue("@event_description", txtDescr.Text);
-                //cmd.Parameters.AddWithValue("@event_free", txtDescr.Text);
-                cmd.Parameters.AddWithValue("@event_no_of_participants", txtNoOfP.Text);
-                cmd.Parameters.AddWithValue("@event_reg_closing_date", txtRegClose.Text);
-                cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
-                cmd.Parameters.AddWithValue("@event_timestamp", DateTime.Now.ToString());
-                cmd.Parameters.AddWithValue("@event_resources", txtResources.Text);
-                
-                cmd.Parameters.AddWithValue("@event_price", Convert.ToDouble(txtPrice.Text));
-                cmd.Parameters.AddWithValue("@event_poster", file_name);
-                
-                System.Diagnostics.Debug.WriteLine("Test5");
-                cmd.ExecuteNonQuery();
-                System.Diagnostics.Debug.WriteLine("Test6");
+                if (uploadPic.HasFile)
+                {
+                    string file_name = uploadPic.FileName.ToString() + "";
+                    uploadPic.PostedFile.SaveAs(Server.MapPath("~/upload/") + file_name);
+                    string query = "UPDATE EVENTS_CREATED SET event_category=@event_category,event_venue=@event_venue, event_poster=@event_poster, event_formal_descr=@event_formal_descr, " +
+                                    "event_description=@event_description, event_free=@event_free, event_price=@event_price, event_eligibility=@event_eligibility, event_no_of_participants=@event_no_of_participants, " +
+                                    "event_reg_closing_date=@event_reg_closing_date, event_resources=@event_resources, event_remarks=@event_remarks WHERE event_id=@itemid";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@itemid", HiddenField_Id1.Value.ToString());
+                    cmd.Parameters.AddWithValue("@event_group", txtOrgClub.Text);
+                    cmd.Parameters.AddWithValue("@event_name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@event_category", drlCategory.SelectedValue.ToString());
+                    cmd.Parameters.AddWithValue("@event_start_date", txtStartDate.Text);
+                    cmd.Parameters.AddWithValue("@event_end_date", txtEndDate.Text);
+                    cmd.Parameters.AddWithValue("@event_start_time", txtStartTime.Text);
+                    cmd.Parameters.AddWithValue("@event_end_time", txtEndTime.Text);
+                    cmd.Parameters.AddWithValue("@event_venue", txtVenue.Text);
+                    cmd.Parameters.AddWithValue("@event_formal_descr", txtFormalDesc.Text);
+                    cmd.Parameters.AddWithValue("@event_description", txtDescr.Text);
+                    if (chkFree.Checked == true)
+                    {
+                        cmd.Parameters.AddWithValue("@event_free", "Y");
+                        cmd.Parameters.AddWithValue("@event_price", Convert.ToDouble(free));
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@event_free", "N");
+                        cmd.Parameters.AddWithValue("@event_price", Convert.ToDouble(txtPrice.Text));
+                    }
+                    cmd.Parameters.AddWithValue("@event_no_of_participants", txtNoOfP.Text);
+                    cmd.Parameters.AddWithValue("@event_reg_closing_date", txtRegClose.Text);
+                    cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
+                    cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
+                    cmd.Parameters.AddWithValue("@event_timestamp", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@event_resources", txtResources.Text);
 
-                Response.Redirect("EO_ViewEvents.aspx");
-                System.Diagnostics.Debug.WriteLine("Test7");
-                con.Close();
+
+                    cmd.Parameters.AddWithValue("@event_poster", file_name);
+
+                    System.Diagnostics.Debug.WriteLine("Test5");
+                    cmd.ExecuteNonQuery();
+                    System.Diagnostics.Debug.WriteLine("Test6");
+
+                    if (Session["userid"] != null)
+                    {
+                        custID = getUserID(Session["userid"].ToString());
+                    }
+
+                    Response.Redirect("EO_ViewEvents.aspx?custid=" + custID);
+                    System.Diagnostics.Debug.WriteLine("Test7");
+                    con.Close();
+                }else
+                {
+                    string query = "UPDATE EVENTS_CREATED SET event_category=@event_category,event_venue=@event_venue,  event_formal_descr=@event_formal_descr, " +
+                                    "event_description=@event_description, event_free=@event_free, event_price=@event_price, event_eligibility=@event_eligibility, event_no_of_participants=@event_no_of_participants, " +
+                                    "event_reg_closing_date=@event_reg_closing_date, event_resources=@event_resources, event_remarks=@event_remarks WHERE event_id=@itemid";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@itemid", HiddenField_Id1.Value.ToString());
+                    cmd.Parameters.AddWithValue("@event_group", txtOrgClub.Text);
+                    cmd.Parameters.AddWithValue("@event_name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@event_category", drlCategory.SelectedValue.ToString());
+                    cmd.Parameters.AddWithValue("@event_start_date", txtStartDate.Text);
+                    cmd.Parameters.AddWithValue("@event_end_date", txtEndDate.Text);
+                    cmd.Parameters.AddWithValue("@event_start_time", txtStartTime.Text);
+                    cmd.Parameters.AddWithValue("@event_end_time", txtEndTime.Text);
+                    cmd.Parameters.AddWithValue("@event_venue", txtVenue.Text);
+                    cmd.Parameters.AddWithValue("@event_formal_descr", txtFormalDesc.Text);
+                    cmd.Parameters.AddWithValue("@event_description", txtDescr.Text);
+                    if (chkFree.Checked == true)
+                    {
+                        cmd.Parameters.AddWithValue("@event_free", "Y");
+                        cmd.Parameters.AddWithValue("@event_price", Convert.ToDouble(free));
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@event_free", "N");
+                        cmd.Parameters.AddWithValue("@event_price", Convert.ToDouble(txtPrice.Text));
+                    }
+                    cmd.Parameters.AddWithValue("@event_no_of_participants", txtNoOfP.Text);
+                    cmd.Parameters.AddWithValue("@event_reg_closing_date", txtRegClose.Text);
+                    cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
+                    cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
+                    cmd.Parameters.AddWithValue("@event_timestamp", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@event_resources", txtResources.Text);
+
+
+                    
+
+                    System.Diagnostics.Debug.WriteLine("Test5");
+                    cmd.ExecuteNonQuery();
+                    System.Diagnostics.Debug.WriteLine("Test6");
+
+                    if (Session["userid"] != null)
+                    {
+                        custID = getUserID(Session["userid"].ToString());
+                    }
+
+                    Response.Redirect("EO_ViewEvents.aspx?custid=" + custID);
+                    System.Diagnostics.Debug.WriteLine("Test7");
+                    con.Close();
+                }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 Response.Write("Error: " + ex.ToString());
             }
+        }
+        public static string getUserID(String username)
+        {
+            String userID = "NULL";
+            String query = "Select user_id from users where user_username= '" + username + "'";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            SqlCommand cm = new SqlCommand(query, conn);
+            SqlDataReader sdr = cm.ExecuteReader();
+            while (sdr.Read())
+            {
+                userID = sdr["user_id"].ToString();
+            }
+
+            return userID;
         }
     }
 }

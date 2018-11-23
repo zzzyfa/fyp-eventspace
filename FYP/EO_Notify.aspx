@@ -22,32 +22,33 @@
             <div id="main-contact-form" class="contact-form">
                 <div class="col-sm-3"></div>
 
-                <div class="col-sm-6">
-                    <hr style="margin-bottom: 50px" />
+                <div class="col-sm-6" style="margin-bottom:30px">
+                    <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey; margin-bottom:30px" />
+                   
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)">
                         <SelectParameters>
                             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
                         </SelectParameters>
                     </asp:SqlDataSource>
                     <div class="form-group" style="margin-bottom:30px">
-                        <label>Event Name:</label>
+                        <label>Event Name <span style="color:red; font-weight:900">*</span></label>
                         <asp:DropDownList ID="drlEvent" runat="server" class="form-control" DataSourceID="SqlDataSource1" DataTextField="event_name" DataValueField="event_name">                            
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose an event." ControlToValidate="drlEvent" InitialValue="-1"></asp:RequiredFieldValidator><br />
                     
                     
-                        <label>Subject:</label>
+                        <label>Subject <span style="color:red; font-weight:900">*</span></label>
                         <asp:TextBox ID="txtSubject" runat="server" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtSubject"></asp:RequiredFieldValidator><br />
                     
                     
-                        <label>Message</label><br />
-                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000"></asp:TextBox>
+                        <label>Message <span style="color:red; font-weight:900">*</span></label><br />
+                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" height="200px"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator16" runat="server" ErrorMessage="This field is required." ControlToValidate="txtMessage"></asp:RequiredFieldValidator><br />
                     
                     
                         <asp:Button ID="btnSend" runat="server" Text="Send Message" class="btn btn-primary btn-lg" OnClick="btnSend_Click" />
-                    
+                   <asp:Label runat="server" Text="Success! Your message has been sent." ForeColor="green" Visible="false" ID="lblMsg" CssClass="highlight"></asp:Label>
                 </div>
                 <%--<div class="col-sm-3" style="margin-bottom: 50px"></div>--%>
             </div>

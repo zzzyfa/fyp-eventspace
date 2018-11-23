@@ -4,8 +4,7 @@
 
 <html>
 <head runat="server">
-    <title>FYP</title>
-
+    
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -63,19 +62,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <div class="nav_right_top">
-                               
+                                <asp:HiddenField ID="HiddenField1" runat="server" />
                                 <ul class="nav navbar-nav">
                                     <li class="active"><a href="P_Home.aspx">Home</a></li>
                                     <li><a href="AboutUs.aspx">About</a></li>
-                                    <li><a href="P_Browse.aspx">Events</a></li>
-                                     <% if (Session["userid"] != null) 
+                                    <% if (Session["userid"] != null) 
                                             
                                         { 
                                              %>
+                                    <li><a href="P_Browse_Loggedin.aspx">Events</a></li>
+                                     
                                      <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AS ORGANISER<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="EO_Create.aspx?custid=<%=custID %>">Create Event</a></li>
+                                            <%--?custid=<%=custID %>--%>
                                             <li><a href="EO_ViewEvents.aspx?custid=<%=custID %>">Submitted Events</a></li>
                                             <li><a href="EO_ViewReports.aspx?custid=<%=custID %>">Sales Reports</a></li>
                                             <li><a href="EO_Notify.aspx?custid=<%=custID %>">Notify</a></li>
@@ -96,6 +97,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     else
                                     {
                                     %>
+                                    <li><a href="P_Browse.aspx">Events</a></li>
                                     <li role="presentation"><a href="Login.aspx">Login</a></li>
                                     <% } %>
                                 </ul>

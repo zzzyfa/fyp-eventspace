@@ -28,9 +28,9 @@
         <div class="center" style="margin-top: 130px">
             <h2>Event Sales Reports</h2>
         </div>
-        <hr />
+        <hr style="height:0.7px; color:lightgrey; background-color:lightgrey; margin-bottom:30px" />
         <div class="col-sm-12 overauto">
-            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting" OnRowCommand="GridView2_RowCommand">
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True"  OnRowCommand="GridView2_RowCommand">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="event_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" HeaderStyle-Font-Underline="true" />
@@ -38,16 +38,20 @@
                     <asp:BoundField DataField="event_group" HeaderText="Org Group" SortExpression="event_group" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_start_time" HeaderText="Start Time" SortExpression="event_start_time" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_price" HeaderText="Price" SortExpression="event_price" HeaderStyle-Font-Underline="true" />
                     <%--tickets sold 
                         btnfield with count as backend and it will show div/popup that shows how many tickets sold
                         --%>
 
-                    <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Report" Text="View" />
+                    <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" ControlStyle-CssClass="btn btn-primary" HeaderText="Report" Text="View" HeaderStyle-Font-Underline="true" />
                 </Columns>
                  <RowStyle BackColor="#EFF3FB" />
                  <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <EmptyDataTemplate>
+                                <h3>You have no approved events events yet.</h3>
+                            </EmptyDataTemplate>
             </asp:GridView>
         </div>
     </div>

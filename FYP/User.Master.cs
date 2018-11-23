@@ -18,6 +18,8 @@ namespace FYP
             if (Session["userid"] != null)
             {
                 custID = getUserID(Session["userid"].ToString());
+                //HiddenField1.Value = custID;
+                //Session["userid2"] = HiddenField1.Value.ToString();
                 custOccu = getUserOccu(Session["userid"].ToString());
 
             }

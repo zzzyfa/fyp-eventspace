@@ -13,6 +13,7 @@ namespace FYP
 {
     public partial class SA_ViewProposals : System.Web.UI.Page
     {
+        public string v;
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (!Page.IsPostBack)
@@ -21,6 +22,14 @@ namespace FYP
             //    FilterStatus(drlStatus);
 
             //}
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                v = Request.QueryString["status"];
+            }
         }
         //public void refreshdata()
         //{
@@ -59,17 +68,17 @@ namespace FYP
         //{
 
         //}
-        //protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
+        protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
 
-        //    int crow;
-        //    crow = Convert.ToInt32(e.CommandArgument.ToString());
-        //    string v = GridView2.Rows[crow].Cells[0].Text;
+            int crow;
+            crow = Convert.ToInt32(e.CommandArgument.ToString());
+            string v = GridView2.Rows[crow].Cells[0].Text;
 
-        //    Response.Redirect("SA_PropDetails.aspx");
-        //}
-       
+            Response.Redirect("SA_PropDetails.aspx?id="+v);
+        }
 
-       
+
+
     }
 }

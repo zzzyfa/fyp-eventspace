@@ -11,10 +11,10 @@ namespace FYP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //check if the webpage is loaded for the first time.
-            {
-                ViewState["PreviousPage"] = Request.UrlReferrer;//Saves the Previous page url in ViewState
-            }
+            //if (!IsPostBack) //check if the webpage is loaded for the first time.
+            //{
+            //    ViewState["PreviousPage"] = Request.UrlReferrer;//Saves the Previous page url in ViewState
+            //}
             //if (Session["userid"] != null)
             //{
             Session.Abandon();

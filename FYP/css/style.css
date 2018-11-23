@@ -117,8 +117,8 @@ label {
 }
 
 .dropdown-menu>li>a {
-    /*display: block;*/
-    display: none;
+    display: block;
+    /*display: none;*/
     padding: 10px 20px;
     clear: both;
     font-weight: normal;
@@ -496,7 +496,7 @@ p.sub_p {
 /*-- /works--*/
 
 .inner_sec_info_wthree_agile {
-    margin-top: 4em;
+    margin-top: 5px;
 }
 
 .banner_inner_con {

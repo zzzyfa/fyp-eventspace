@@ -905,6 +905,8 @@ div.ppt {
 }
 span.image-block.block2 img {
     background: #eaeaea;
+    /*object-fit: cover;*/
+   align-self:center;
 }
 .image-block img:hover {
 
@@ -933,6 +935,7 @@ ul.portfolio-categ li a {
 .port-info {
     background: #fff;
     padding: 0.5em 1em;
+    
     transition: 0.5s all;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;

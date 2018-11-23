@@ -11,10 +11,10 @@
 
 
             <div style="text-align:center; margin-top:100px">
-                <h3>Your order has been received.</h3>
+                <h3>You have successfully signed up for this event.</h3>
             </div>
             <div style="text-align:center">
-                <h4>Thank you for your purchase.</h4>
+                <h4>Thank you for joining!</h4>
             </div>
 
             <div class="row contact-wrap">

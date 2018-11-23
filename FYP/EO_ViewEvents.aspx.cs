@@ -14,19 +14,20 @@ namespace FYP
 {
     public partial class EO_ViewEvents : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (Session["userid"] == null)
             {
-                refreshdata();
+                Response.Redirect("Login.aspx");
             }
         }
         public void refreshdata()
         {
-            SqlConnection con = new SqlConnection
-                (ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            SqlCommand cmd = new SqlCommand
-                ("SELECT * FROM [EVENTS_CREATED]", con);
+            string id = Request.QueryString["custid"];
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * from events_created WHERE user_id = @userid", con);
+            cmd.Parameters.AddWithValue("@userid", id);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -34,7 +35,28 @@ namespace FYP
             GridView2.DataBind();
             ViewState["dirState"] = dt;
             ViewState["sortdr"] = "Asc";
+
+
         }
+
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = "DESC";
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
         protected void gridView_Sorting(object sender, GridViewSortEventArgs e)
         {
             DataTable dtrslt = (DataTable)ViewState["dirState"];
@@ -52,6 +74,8 @@ namespace FYP
                 }
                 GridView2.DataSource = dtrslt;
                 GridView2.DataBind();
+
+
             }
         }
         protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)

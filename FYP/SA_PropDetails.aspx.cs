@@ -19,7 +19,11 @@ namespace FYP
         public object HiddenField_Id { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else if (!IsPostBack)
             {
                 try
                 {
@@ -60,6 +64,7 @@ namespace FYP
                                         image = row["event_poster"].ToString();
                                         string eligibility = row["event_eligibility"].ToString();
                                         string category = row["event_category"].ToString();
+                                        string status = row["event_status"].ToString();
 
                                         this.HiddenField_Id1.Value = itemid;
                                         this.txtOrgClub.Text = group;
@@ -78,6 +83,14 @@ namespace FYP
                                         this.txtRemarks.Text = remarks;
                                         this.txtCategory.Text = category;
                                         this.txtEligibility.Text = eligibility;
+                                        if (status == "Pending"){
+                                            
+                                            }
+                                        else
+                                        {
+                                            btnApprove.Visible = false;
+                                            btnReject.Visible = false;
+                                        }
                                         
                                     }
                                     con.Close();
@@ -95,7 +108,7 @@ namespace FYP
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            string approve = "approved";
+            string approve = "Approved";
             System.Diagnostics.Debug.WriteLine("Test1");
             SqlConnection con = new
         SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -130,7 +143,7 @@ namespace FYP
 
         protected void btnReject_Click(object sender, EventArgs e)
         {
-            string reject = "rejected";
+            string reject = "Rejected";
             System.Diagnostics.Debug.WriteLine("Test1");
             SqlConnection con = new
         SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);

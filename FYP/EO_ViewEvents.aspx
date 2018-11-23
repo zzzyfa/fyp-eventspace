@@ -27,9 +27,10 @@
         <div class="center" style="margin-top: 130px">
             <h2>Submitted Events</h2>
         </div>
-        <hr />
+        <hr style="height:0.8px; color:lightgrey; background-color:lightgrey; margin-bottom:30px" />
         <div class="col-sm-12 overauto">
-                        <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" Width="1000px" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting" OnRowCommand="GridView2_RowCommand">
+                        <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" OnRowCommand="GridView2_RowCommand" DataSourceID="SqlDataSource1">
+                            <%--AllowSorting="true" OnSorting="gridView_Sorting" --%>
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="event_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" ItemStyle-Width="50px" HeaderStyle-Font-Underline="true" />
@@ -38,12 +39,26 @@
                                 <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
+                                 <asp:BoundField DataField="event_price" HeaderText="Price" SortExpression="event_price" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_status" HeaderText="Status" SortExpression="event_status" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_comments" HeaderText="Comments" SortExpression="comments" HeaderStyle-Font-Underline="true" />
-                                <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Edit" Text="Edit"  />
+                                <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Details" Text="Edit" ControlStyle-CssClass="btn btn-primary"  HeaderStyle-Font-Underline="true"  />
                             </Columns>
                            <RowStyle BackColor="#EFF3FB" />
+                              <EditRowStyle BackColor="#2461BF" />
+                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
                  <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <EmptyDataTemplate>
+                                <h3>You have not submitted any events yet.</h3>
+                            </EmptyDataTemplate>
                         </asp:GridView>
                     </div>
                 </div>

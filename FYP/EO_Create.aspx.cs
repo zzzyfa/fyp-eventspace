@@ -15,15 +15,37 @@ namespace FYP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userid"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
             
-            
+
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            string event_status = "pending";
+            string event_status = "Pending";
             string custID = Request.QueryString["custid"];
+            //string custID = Session["userid"].ToString();
             int free = 0;
             //int custID = 1;
+
+            //string resources = "";
+            //foreach (ListItem listItem in CheckBoxList1.Items)
+            //{
+            //    if (listItem.Selected)
+            //    {
+            //        //do some work 
+            //    }
+            //    else
+            //    {
+            //        //do something else 
+            //    }
+            //}
+
+
+
+
 
             System.Diagnostics.Debug.WriteLine("Test1");
             SqlConnection con = new

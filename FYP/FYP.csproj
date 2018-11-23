@@ -73,7 +73,6 @@
       <DependentUpon>FYP.mdf</DependentUpon>
     </Content>
     <Content Include="css\home.css" />
-    <Content Include="datepicker.aspx" />
     <Content Include="default\404.html" />
     <Content Include="default\about.html" />
     <Content Include="default\contact.html" />
@@ -134,31 +133,30 @@
     <Content Include="js\script.js" />
     <Content Include="default\portfolio.html" />
     <Content Include="Login.aspx" />
+    <Content Include="Login2.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="P_Browse.aspx" />
     <Content Include="P_Checkout.aspx" />
     <Content Include="P_EventDetail.aspx" />
+    <Content Include="P_Browse_Loggedin.aspx" />
     <Content Include="P_Home.aspx" />
     <Content Include="P_PurchHist.aspx" />
     <Content Include="default\signin.html" />
     <Content Include="default\signup.html" />
     <Content Include="default\single.html" />
     <Content Include="P_Registration.aspx" />
+    <Content Include="P_SearchEvents.aspx" />
+    <Content Include="P_SearchEventsLoggedIn.aspx" />
     <Content Include="P_Success.aspx" />
+    <Content Include="P_UpdateProfile.aspx" />
     <Content Include="SA_Home.aspx" />
     <Content Include="SA_PropDetails.aspx" />
     <Content Include="SA_ViewProposals.aspx" />
+    <Content Include="SA_ViewPropsAll.aspx" />
     <Content Include="w3layouts-License.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="datepicker.aspx.cs">
-      <DependentUpon>datepicker.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="datepicker.aspx.designer.cs">
-      <DependentUpon>datepicker.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EO_Create.aspx.cs">
       <DependentUpon>EO_Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,12 +206,26 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login2.aspx.cs">
+      <DependentUpon>Login2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login2.aspx.designer.cs">
+      <DependentUpon>Login2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_Browse_Loggedin.aspx.cs">
+      <DependentUpon>P_Browse_Loggedin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_Browse_Loggedin.aspx.designer.cs">
+      <DependentUpon>P_Browse_Loggedin.aspx</DependentUpon>
     </Compile>
     <Compile Include="P_Registration.aspx.cs">
       <DependentUpon>P_Registration.aspx</DependentUpon>
@@ -222,12 +234,40 @@
     <Compile Include="P_Registration.aspx.designer.cs">
       <DependentUpon>P_Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="P_SearchEvents.aspx.cs">
+      <DependentUpon>P_SearchEvents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_SearchEvents.aspx.designer.cs">
+      <DependentUpon>P_SearchEvents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_SearchEventsLoggedIn.aspx.cs">
+      <DependentUpon>P_SearchEventsLoggedIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_SearchEventsLoggedIn.aspx.designer.cs">
+      <DependentUpon>P_SearchEventsLoggedIn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="P_Success.aspx.cs">
       <DependentUpon>P_Success.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="P_Success.aspx.designer.cs">
       <DependentUpon>P_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="P_UpdateProfile.aspx.cs">
+      <DependentUpon>P_UpdateProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="P_UpdateProfile.aspx.designer.cs">
+      <DependentUpon>P_UpdateProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SA_ViewPropsAll.aspx.cs">
+      <DependentUpon>SA_ViewPropsAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SA_ViewPropsAll.aspx.designer.cs">
+      <DependentUpon>SA_ViewPropsAll.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>

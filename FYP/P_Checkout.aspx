@@ -8,16 +8,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section id="contact-page">
         <div class="container">
-            <div style="text-align: center">
+            <div style="text-align: center; margin-top:130px">
                 <h2>Payment</h2>
             </div>
-            <br /><br />
+            
             <div class="row contact-wrap">
                 <div class="status alert alert-success" style="display: none"></div>
                 <div id="main-contact-form" class="contact-form">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
-
+                        <hr style="height:0.7px; color:lightgrey; background-color:lightgrey" />
                         <div class="form-group">
                             <label>Card Number:</label>
                             <asp:TextBox ID="txtCardNo" runat="server" class="form-control"></asp:TextBox>

@@ -21,6 +21,10 @@ namespace FYP
                 
             }
             Session["userOccu"] = custOccu;
+
+
+
+
         }
         public static string getUserOccu(String username)
         {
@@ -36,6 +40,12 @@ namespace FYP
             }
 
             return userOccu;
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string key = txtSearch.Text;
+            Response.Redirect("P_SearchEvents.aspx?key=" + key);
         }
     }
 }
