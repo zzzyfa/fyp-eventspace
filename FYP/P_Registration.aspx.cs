@@ -13,6 +13,10 @@ namespace FYP
 {
     public partial class P_Registration : System.Web.UI.Page
     {
+        public String event_shirt = "";
+        public String event_food = "";
+        public String yes = "Y";
+        public String no = "N";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
@@ -82,14 +86,30 @@ namespace FYP
                                         foreach (DataRow row in dt.Rows)
                                         {
                                             string event_free = row["event_free"].ToString();
+                                             event_shirt = row["event_shirt"].ToString();
+                                             event_food = row["event_food"].ToString();
                                             this.HiddenField1.Value = event_free;
-
+                                            this.Label1.Text = event_shirt;
+                                            this.Label2.Text = event_food;
                                         }
                                         con.Close();
+                                        
                                     }
                                 }
                             }
                         }
+                        //Label1.Text = event_shirt;
+                        //Label2.Text = event_food;
+
+                        //if (event_shirt == no)
+                        //{
+                        //    panelShirt.Visible = false;
+                        //}
+                        //if (event_food == yes)
+                        //{
+                        //    panelFood.Visible = false;
+                        //}
+                        
                     }
                     catch (Exception ex)
                     {

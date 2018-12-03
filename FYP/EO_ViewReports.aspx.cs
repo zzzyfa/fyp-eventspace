@@ -17,49 +17,49 @@ namespace FYP
         {
             if (!Page.IsPostBack)
             {
-                refreshdata();
+                //refreshdata();
             }
         }
-        public void refreshdata()
-        {
-            String custID = Request.QueryString["custid"];
-            SqlConnection con = new SqlConnection
-                (ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+//        public void refreshdata()
+//        {
+//            String custID = Request.QueryString["custid"];
+//            SqlConnection con = new SqlConnection
+//                (ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand
-("SELECT * FROM [EVENTS_CREATED] WHERE user_id="+custID, con);
+//            SqlCommand cmd = new SqlCommand
+//("SELECT * FROM [EVENTS_CREATED] WHERE user_id="+custID, con);
 
-            //("SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)", con);
-            //            cmd.Parameters.AddWithValue("@user_id", custID);
+//            //("SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)", con);
+//            //            cmd.Parameters.AddWithValue("@user_id", custID);
 
 
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            GridView2.DataSource = dt;
-            GridView2.DataBind();
-            ViewState["dirState"] = dt;
-            ViewState["sortdr"] = "Asc";
-        }
-        protected void gridView_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            DataTable dtrslt = (DataTable)ViewState["dirState"];
-            if (dtrslt.Rows.Count > 0)
-            {
-                if (Convert.ToString(ViewState["sortdr"]) == "Asc")
-                {
-                    dtrslt.DefaultView.Sort = e.SortExpression + " Desc";
-                    ViewState["sortdr"] = "Desc";
-                }
-                else
-                {
-                    dtrslt.DefaultView.Sort = e.SortExpression + " Asc";
-                    ViewState["sortdr"] = "Asc";
-                }
-                GridView2.DataSource = dtrslt;
-                GridView2.DataBind();
-            }
-        }
+//            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+//            DataTable dt = new DataTable();
+//            sda.Fill(dt);
+//            GridView2.DataSource = dt;
+//            //GridView2.DataBind();
+//            ViewState["dirState"] = dt;
+//            ViewState["sortdr"] = "Asc";
+//        }
+        //protected void gridView_Sorting(object sender, GridViewSortEventArgs e)
+        //{
+        //    DataTable dtrslt = (DataTable)ViewState["dirState"];
+        //    if (dtrslt.Rows.Count > 0)
+        //    {
+        //        if (Convert.ToString(ViewState["sortdr"]) == "Asc")
+        //        {
+        //            dtrslt.DefaultView.Sort = e.SortExpression + " Desc";
+        //            ViewState["sortdr"] = "Desc";
+        //        }
+        //        else
+        //        {
+        //            dtrslt.DefaultView.Sort = e.SortExpression + " Asc";
+        //            ViewState["sortdr"] = "Asc";
+        //        }
+        //        GridView2.DataSource = dtrslt;
+        //        GridView2.DataBind();
+        //    }
+        //}
         protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
 

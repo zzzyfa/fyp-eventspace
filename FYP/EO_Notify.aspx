@@ -36,6 +36,13 @@
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose an event." ControlToValidate="drlEvent" InitialValue="-1"></asp:RequiredFieldValidator><br />
                     
+                        <label>From <span style="color:red; font-weight:900">*</span></label>
+                        <asp:TextBox ID="txtFrom" runat="server" class="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please enter recipient email." ControlToValidate="txtFrom" ></asp:RequiredFieldValidator><br />
+
+                        <label>Recipient <span style="color:red; font-weight:900">*</span></label>
+                        <asp:TextBox ID="txtRecipient" runat="server" class="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please enter recipient email." ControlToValidate="txtRecipient"></asp:RequiredFieldValidator><br />
                     
                         <label>Subject <span style="color:red; font-weight:900">*</span></label>
                         <asp:TextBox ID="txtSubject" runat="server" class="form-control"></asp:TextBox>
@@ -49,6 +56,7 @@
                     
                         <asp:Button ID="btnSend" runat="server" Text="Send Message" class="btn btn-primary btn-lg" OnClick="btnSend_Click" />
                    <asp:Label runat="server" Text="Success! Your message has been sent." ForeColor="green" Visible="false" ID="lblMsg" CssClass="highlight"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 </div>
                 <%--<div class="col-sm-3" style="margin-bottom: 50px"></div>--%>
             </div>

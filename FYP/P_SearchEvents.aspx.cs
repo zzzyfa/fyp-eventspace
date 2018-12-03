@@ -20,5 +20,10 @@ namespace FYP
             string key = txtSearch.Text;
             Response.Redirect("P_SearchEvents.aspx?key=" + key);
         }
+
+        protected void btnReload_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("P_Browse.aspx");
+        }
     }
 }

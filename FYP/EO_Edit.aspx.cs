@@ -18,6 +18,7 @@ namespace FYP
         public string image = "";
         public String custID = "";
         public object HiddenField_Id { get; private set; }
+        public String reg = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
@@ -51,13 +52,16 @@ namespace FYP
                                         string group = row["event_group"].ToString();
                                         string start_date = row["event_start_date"].ToString();
                                         string end_date = row["event_end_date"].ToString();
+                                        //DateTime start_date = (DateTime)row["event_start_date"];
+                                        //DateTime end_date = (DateTime)row["event_end_date"];
                                         string start_time = row["event_start_time"].ToString();
                                         string end_time = row["event_end_time"].ToString();
                                         string venue = row["event_venue"].ToString();
                                         string formal_descr = row["event_formal_descr"].ToString();
                                         string free = row["event_free"].ToString();
                                         string no_of_p = row["event_no_of_participants"].ToString();
-                                        string reg_close = row["event_reg_closing_date"].ToString();
+                                        //string reg_close = row["event_reg_closing_date"].ToString();
+                                        DateTime reg_close = (DateTime)row["event_reg_closing_date"];
                                         string resources = row["event_resources"].ToString();
                                         string remarks = row["event_remarks"].ToString();
                                         string item_price = row["event_price"].ToString();
@@ -77,8 +81,10 @@ namespace FYP
                                         this.txtVenue.Text = venue;
                                         this.txtFormalDesc.Text = formal_descr;
                                         this.txtNoOfP.Text = no_of_p;
-                                        this.txtRegClose.Text = reg_close;
-                                        this.txtResources.Text = resources;
+                                        //this.txtRegClose.Text = reg_close;
+                                        reg = reg_close.ToShortDateString();
+                                        this.txtRegClose.Text = reg.ToString();
+                                        //this.txtResources.Text = resources;
                                         this.txtRemarks.Text = remarks;
                                         if (free == "Y")
                                         {
@@ -94,6 +100,16 @@ namespace FYP
                                         //drlEligibility.SelectedValue = drlEligibility.Items.FindByText(row["event_eligibility"].ToString()).Value;
                                         drlEligibility.SelectedValue = row["event_eligibility"].ToString();
                                         drlCategory.SelectedValue = row["event_category"].ToString();
+
+                                        string str = resources;
+
+                                        string[] countries = str.Split(',');
+
+                                        foreach (string country in countries)
+                                        {
+                                            CheckBoxList1.Items.FindByValue(country).Selected = true;
+                                        }
+
                                     }
                                     con.Close();
                                 }
@@ -121,6 +137,16 @@ namespace FYP
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             int free = 0;
+            string resources = "";
+            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+            {
+                if (CheckBoxList1.Items[i].Selected)
+                {
+                    resources += CheckBoxList1.Items[i].Value + ",";
+                }
+
+            }
+            resources = resources.TrimEnd(',');
 
             System.Diagnostics.Debug.WriteLine("Test1");
             SqlConnection con = new
@@ -164,7 +190,7 @@ namespace FYP
                     cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
                     cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
                     cmd.Parameters.AddWithValue("@event_timestamp", DateTime.Now.ToString());
-                    cmd.Parameters.AddWithValue("@event_resources", txtResources.Text);
+                    cmd.Parameters.AddWithValue("@event_resources", resources);
 
 
                     cmd.Parameters.AddWithValue("@event_poster", file_name);
@@ -213,10 +239,10 @@ namespace FYP
                     cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
                     cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
                     cmd.Parameters.AddWithValue("@event_timestamp", DateTime.Now.ToString());
-                    cmd.Parameters.AddWithValue("@event_resources", txtResources.Text);
+                    cmd.Parameters.AddWithValue("@event_resources", resources);
 
 
-                    
+
 
                     System.Diagnostics.Debug.WriteLine("Test5");
                     cmd.ExecuteNonQuery();

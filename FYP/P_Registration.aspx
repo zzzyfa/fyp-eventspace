@@ -45,7 +45,8 @@
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="This field is required." ControlToValidate="txtAltEmail"></asp:RequiredFieldValidator>
 
                         </div>
-                        <div class="form-group">
+                       
+                        <asp:Panel runat="server" class="form-group" ID="panelShirt">
                             <label>Shirt Size:</label>
                             <asp:DropDownList ID="drlShirt" runat="server" class="form-control">
                                 <asp:ListItem Enabled="true" Text="Select Size" Value="-1"></asp:ListItem>
@@ -58,8 +59,9 @@
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="This field is required." ControlToValidate="drlShirt" InitialValue="-1"></asp:RequiredFieldValidator>
 
-                        </div>
-                        <div class="form-group">
+                        </asp:Panel>
+                            
+                        <asp:Panel runat="server" class="form-group" ID="panelFood">
                             <label>Food Preference:</label>
                             <asp:DropDownList ID="drlFood" runat="server" class="form-control">
                                 <asp:ListItem Enabled="true" Text="Select Food Preference" Value="-1"></asp:ListItem>
@@ -67,7 +69,10 @@
                                 <asp:ListItem Text="Non-vegetarian" Value="Non-vegetarian"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator6" runat="server" ErrorMessage="This field is required." ControlToValidate="drlFood" InitialValue="-1"></asp:RequiredFieldValidator>
-                        </div>
+                        </asp:Panel>
+                       
+                        <asp:Label ID="Label1" runat="server" ></asp:Label>
+                        <asp:Label ID="Label2" runat="server" ></asp:Label>
                         <div class="form-group">
 
                             <asp:Button ID="btnProceed" runat="server" Text="Proceed" class="btn btn-primary btn-lg" OnClick="btnProceed_Click" />

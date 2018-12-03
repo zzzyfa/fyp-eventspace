@@ -15,6 +15,13 @@ namespace FYP
             {
                 Response.Redirect("Login.aspx");
             }
+            else if (!Page.IsPostBack)
+
+            {
+
+                string key = Request.QueryString["key"];
+                lblSearch.Text = key;
+            }
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -24,6 +31,18 @@ namespace FYP
             string v = GridView2.Rows[crow].Cells[0].Text;
 
             Response.Redirect("SA_PropDetails.aspx?id=" + v);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string key = txtSearch.Text;
+            Response.Redirect("SA_SearchProps.aspx?key=" + key);
+        }
+
+        protected void btnReload_Click(object sender, EventArgs e)
+        {
+            String custID = Request.QueryString["id"];
+            Response.Redirect("SA_ViewPropsAll.aspx?id=" + custID);
         }
     }
 }

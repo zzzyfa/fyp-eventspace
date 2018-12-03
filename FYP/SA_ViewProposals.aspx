@@ -58,14 +58,14 @@
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="event_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" ItemStyle-Width="50px" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_timestamp" HeaderText="Timestamp" SortExpression="event_timestamp" HeaderStyle-Font-Underline="true" />
+                                <asp:BoundField DataField="event_timestamp" HeaderText="Timestamp" SortExpression="event_timestamp" HeaderStyle-Font-Underline="true" ItemStyle-Width="10%" />
                                 <asp:BoundField DataField="event_group" HeaderText="Org Group" SortExpression="event_group" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_category" HeaderText="Category" SortExpression="event_category" HeaderStyle-Font-Underline="true" />
+                                <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true" />
+                                
                                 <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_end_date" HeaderText="End Date" SortExpression="event_end_date" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_status" HeaderText="Status" SortExpression="event_status" HeaderStyle-Font-Underline="true" />
+                                <%--<asp:BoundField DataField="event_status" HeaderText="Status" SortExpression="event_status" HeaderStyle-Font-Underline="true" />--%>
                                 <asp:BoundField DataField="event_comments" HeaderText="Comments" SortExpression="event_comments" HeaderStyle-Font-Underline="true" />
                                 <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Details" Text="View" ControlStyle-CssClass="btn btn-primary" HeaderStyle-Font-Underline="true"   />
                             </Columns>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
     
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([event_status] = @event_status2)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT  event_id, event_name, event_timestamp, event_category, event_group, event_status, event_comments, event_venue, event_start_time, event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date,  FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date FROM [EVENTS_CREATED] WHERE ([event_status] = @event_status2)">
         <SelectParameters>
             
             <asp:QueryStringParameter Name="event_status2" QueryStringField="status" Type="String" />

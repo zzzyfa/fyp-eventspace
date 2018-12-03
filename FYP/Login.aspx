@@ -31,7 +31,7 @@
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
 
                         </div>
-                       <div class="form-group">
+                       <div class="form-group" style="margin-bottom:50px">
                             <asp:Label ID="lbl1" ForeColor="red" runat="server" Visible="False" Text="Wrong username or password."></asp:Label><br />
                             <asp:Button ID="btnLog" runat="server" Text="Login" class="btn btn-primary btn-lg" OnClick="btnLog_Click" />
                         </div>

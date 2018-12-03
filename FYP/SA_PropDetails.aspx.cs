@@ -130,7 +130,7 @@ namespace FYP
                 cmd.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("Test6");
 
-                Response.Redirect("SA_ViewProposals.aspx");
+                Response.Redirect("SA_ViewPropsAll.aspx");
                 System.Diagnostics.Debug.WriteLine("Test7");
                 con.Close();
             }
@@ -165,7 +165,7 @@ namespace FYP
                 cmd.ExecuteNonQuery();
                 System.Diagnostics.Debug.WriteLine("Test6");
 
-                Response.Redirect("SA_ViewProposals.aspx");
+                Response.Redirect("SA_ViewPropsAll.aspx");
                 System.Diagnostics.Debug.WriteLine("Test7");
                 con.Close();
             }

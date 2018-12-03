@@ -1,1 +1,3 @@
 C:\Users\User\source\repos\FYP\FYP\obj\Debug\FYP.csprojResolveAssemblyReference.cache
+C:\Users\User\source\repos\FYP\FYP\obj\Debug\FYP.csprojAssemblyReference.cache
+C:\Users\User\source\repos\FYP\FYP\obj\Debug\FYP.csproj.CoreCompileInputs.cache

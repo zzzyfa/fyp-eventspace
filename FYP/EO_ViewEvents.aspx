@@ -29,14 +29,14 @@
         </div>
         <hr style="height:0.8px; color:lightgrey; background-color:lightgrey; margin-bottom:30px" />
         <div class="col-sm-12 overauto">
-                        <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" OnRowCommand="GridView2_RowCommand" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" OnRowCommand="GridView2_RowCommand" DataSourceID="SqlDataSource1" PageSize="15">
                             <%--AllowSorting="true" OnSorting="gridView_Sorting" --%>
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="event_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" ItemStyle-Width="50px" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_timestamp" HeaderText="Timestamp" SortExpression="event_timestamp" HeaderStyle-Font-Underline="true" />
+                                <asp:BoundField DataField="event_timestamp" HeaderText="Timestamp" SortExpression="event_timestamp" HeaderStyle-Font-Underline="true" ItemStyle-Width="10%" />
                                 <asp:BoundField DataField="event_group" HeaderText="Org Group" SortExpression="event_group" HeaderStyle-Font-Underline="true" />
-                                <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true" />
+                                <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true"   ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true"  />
                                 <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
                                 <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
                                  <asp:BoundField DataField="event_price" HeaderText="Price" SortExpression="event_price" HeaderStyle-Font-Underline="true" />
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)" OnSelecting="SqlDataSource1_Selecting">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_timestamp, event_price, event_group, event_status, event_comments, event_venue, event_start_time, event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date,  FORMAT (event_end_date, 'ddd dd MMM yyyy') FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)" OnSelecting="SqlDataSource1_Selecting">
         <SelectParameters>
             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
         </SelectParameters>

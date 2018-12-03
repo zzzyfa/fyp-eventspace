@@ -48,7 +48,7 @@
                                 <asp:ListItem Text="Business" Value="BS"></asp:ListItem>
                                 <asp:ListItem Text="IT" Value="IT"></asp:ListItem>
                                 <asp:ListItem Text="Engineering" Value="EG"></asp:ListItem>
-                                <asp:ListItem Text="Extra-Curricular" Value="EX"></asp:ListItem>
+                                <asp:ListItem Text="Sports" Value="SP"></asp:ListItem>
                                 <asp:ListItem Text="Others" Value="OT"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="This field is required." ControlToValidate="drlCategory" InitialValue="-1"></asp:RequiredFieldValidator><br />
@@ -59,14 +59,14 @@
                         <div class="row class1s" style="margin-bottom: 40px; margin-top: 40px">
                             <div class="col-md-4">
                                 <label>Start Date <span style="color:red; font-weight:900">*</span></label>
-                                <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
+                                <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="160px" ReadOnly="true" TextMode="DateTime"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="row class1s" style="margin-bottom: 40px; margin-top: 40px">
                             <div class="col-md-4">
                                 <label>End Date <span style="color:red; font-weight:900">*</span></label>
-                                <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
+                                <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="160px" ReadOnly="true" TextMode="DateTime"></asp:TextBox>
                             </div>
                         </div>
 
@@ -111,9 +111,9 @@
                 </div>
                 <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
                 <div class="form-group">
-                    <label>Formal Event Description <span style="color:red; font-weight:900">*</span></label><br />
+                    <label>Event Background <span style="color:red; font-weight:900">*</span></label><br />
                     <label style="font-size: small">For admin review</label>
-                    <asp:TextBox ID="txtFormalDesc" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" Height="200px"></asp:TextBox>
+                    <asp:TextBox ID="txtFormalDesc" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" Height="200px" ></asp:TextBox>
                     <label style="font-size: small; color: grey">Word limit: 1000 words</label>
                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtFormalDesc"></asp:RequiredFieldValidator><br />
                 </div>
@@ -121,7 +121,7 @@
                 <div class="form-group">
                     <label>Event Description <span style="color:red; font-weight:900">*</span></label><br />
                     <label style="font-size: small">For target audience</label>
-                    <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" Height="200px"></asp:TextBox>
+                    <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" Height="200px" ></asp:TextBox>
                     <label style="font-size: small; color: grey">Word limit: 500 words</label>
                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator11" runat="server" ErrorMessage="This field is required." ControlToValidate="txtDescr"></asp:RequiredFieldValidator><br />
                 </div>
@@ -156,18 +156,38 @@
                 <br />
                 <div class="form-group" style="margin-bottom: 40px;">
                     <label>Registration Closing Date <span style="color:red; font-weight:900">*</span></label>
-                    <asp:TextBox ID="txtRegClose" runat="server" class="form-control" Width="200px" TextMode="Date"></asp:TextBox>
-
-                    <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator14" runat="server" ErrorMessage="This field is required." ControlToValidate="txtRegClose"></asp:RequiredFieldValidator><br />
+                    <asp:TextBox ID="txtRegClose" runat="server" class="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator14" runat="server" ErrorMessage="This field is required." ControlToValidate="txtRegClose"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator id="CompareValidator2" runat="server" 
+     ControlToCompare="txtStartDate" cultureinvariantvalues="true" 
+     display="Dynamic" enableclientscript="true"  
+     ControlToValidate="txtRegClose"  ForeColor="Red"
+     ErrorMessage="Registration closing date must be earlier than start date."
+     type="Date" setfocusonerror="true" Operator="GreaterThanEqual" 
+     text="Registration closing date must be earlier than start date."></asp:CompareValidator><br />
                 </div>
-                <div class="form-group">
+                <%--<div class="form-group">
                     <label>Resources Needed from APU <span style="color:red; font-weight:900">*</span></label><br />
                     <label style="font-size: small">PA System, Transportation, Tables, etc. If none, please type "N/A".</label>
                     <asp:TextBox ID="txtResources" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
                     <label style="font-size: small; color: grey">Word limit: 500 words</label>
                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator15" runat="server" ErrorMessage="This field is required." ControlToValidate="txtResources"></asp:RequiredFieldValidator><br />
                 </div>
-                <br />
+                <br />--%>
+                     <div class="form-group">
+                        <label>Resources Needed from APU <span style="color:red; font-weight:900"></span></label><br />
+
+                        <label style="font-size: small">For checked items, please make booking at the respective link.</label>
+                        <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+                            <asp:ListItem Value="Room"> Room / Auditorium (<a href="http://bit.ly/APU001">bit.ly/APU001</a>) </asp:ListItem>
+                             <asp:ListItem Value="Transportation"> Transportation (<a href="http://bit.ly/APU002">bit.ly/APU002</a>) </asp:ListItem>
+                            <asp:ListItem Value="Logistics/Booth"> Logistics / Atrium / Booth (<a href="http://bit.ly/APU003">bit.ly/APU003</a>)  </asp:ListItem> 
+                            <asp:ListItem Value="Audio/Visual"> Audio & Visual (<a href="http://bit.ly/APU005">bit.ly/APU005</a>)  </asp:ListItem>
+                            <asp:ListItem Value="Certificates"> Certificates </asp:ListItem>
+                        </asp:CheckBoxList>
+                        
+                    </div>
+                    <br />
                 <div class="form-group">
                     <label>Additional Remarks (Optional)</label><br />
                     <asp:TextBox ID="txtRemarks" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
