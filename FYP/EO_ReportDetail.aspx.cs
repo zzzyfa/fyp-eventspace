@@ -15,8 +15,8 @@ namespace FYP
 {
     public partial class EO_ReportDetail : System.Web.UI.Page
     {
-        public String shirt = "";
-        public String food = "";
+        public int shirt = 0;
+        public int food = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
@@ -42,12 +42,17 @@ namespace FYP
                 while (sdr.Read())
                 {
                     price = sdr["event_price"].ToString();
-                    shirt = sdr["event_shirt"].ToString();
-                    food = sdr["event_food"].ToString();
+                    shirt = Convert.ToInt32(sdr["event_shirt"]);
+                    food = Convert.ToInt32(sdr["event_food"]);
                 }
                 totalamount = Convert.ToDecimal(price) * Convert.ToDecimal(count);
                 lblAmount.Text = totalamount.ToString();
 
+                //if (shirt == "N" )
+                //{
+                //    GridView2.Visible = false;
+                    
+                //}
 
                 int countXS = 0;
                 int countS = 0;
@@ -105,15 +110,14 @@ namespace FYP
                 }
                 lblV.Text = countV.ToString();
                 lblNV.Text = countNV.ToString();
-
                 
-
-
-
-
-
             }
         }
+
+
+        
+
+
         public void refreshdata()
         {
             String custID = Request.QueryString["id"];
@@ -121,8 +125,30 @@ namespace FYP
                 (ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             SqlCommand cmd = new SqlCommand
             //("SELECT * FROM [EVENTS_CREATED] WHERE event_id=" + custID, con);
-            ("SELECT p.event_id,  p.payment_timestamp,  p.user_id, c.event_name, u.user_name, u.user_mobile_no, u.user_email, u.user_alt_email, u.user_occupation, u.user_shirt_size, u.user_food FROM [EVENTS_PURCHASED] AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN [USERS] AS u ON p.user_id = u.user_id WHERE p.event_id =" + custID, con);
+            ("SELECT p.event_id,  p.payment_timestamp,  p.user_id, c.event_name, c.event_shirt, c.event_food, u.user_name, u.user_mobile_no, u.user_email, u.user_alt_email, u.user_occupation, u.user_shirt_size, u.user_food FROM [EVENTS_PURCHASED] AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN [USERS] AS u ON p.user_id = u.user_id WHERE p.event_id =" + custID, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            while (sdr.Read())
+            {
+                
+                shirt = Convert.ToInt32(sdr["event_shirt"]);
+                food = Convert.ToInt32(sdr["event_food"]);
+            }
+            
+            if (shirt == 0)
+            {
+                GridView2.Columns[6].Visible = false;
+                pnlShirt.Visible = false;
+            }
+            if(food == 0)
+            {
+                GridView2.Columns[7].Visible = false;
+                pnlFood.Visible = false;
+            }
+           
+
+            con.Close();
             DataTable dt = new DataTable();
             sda.Fill(dt);
             GridView2.DataSource = dt;

@@ -77,7 +77,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
                 <EmptyDataTemplate>
-                    <h4>There are no tickets sold for this event as of now.</h4>
+                    <h4>There are no matches for that keyword.</h4>
                 </EmptyDataTemplate>
             </asp:GridView>
 
@@ -110,7 +110,7 @@
                
             </div>
                 </div>
-             <div class="col-md-4">
+            <asp:Panel ID="pnlShirt" runat="server" CssClass="col-md-4">
                     <div style="margin-bottom: 5px">
                         <h4 style="text-decoration:underline">Summary of Shirt Sizes</h4>
                         <br />
@@ -139,9 +139,9 @@
                     </div>
                     <br />
                     <br />
-                </div>
+                </asp:Panel>
 
-                <div class="col-md-4">
+                 <asp:Panel ID="pnlFood" runat="server" CssClass="col-md-4">
                     <div style="margin-bottom: 5px">
                         <h4 style="text-decoration:underline">Summary of Food Preference</h4>
                         <br />
@@ -152,7 +152,7 @@
                         <asp:Label runat="server" class="media-heading" Style="float: left">Non-vegetarian: </asp:Label>
                         <asp:Label runat="server" ID="Label8" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
                     </div>
-                </div>
+               </asp:Panel>
             <br />
             <%--<div>
                     <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>

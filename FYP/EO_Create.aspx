@@ -170,7 +170,7 @@
                             Display="Dynamic" EnableClientScript="true"
                             ControlToValidate="txtRegClose" ForeColor="Red"
                             ErrorMessage="Registration closing date must be earlier than start date."
-                            Type="Date" SetFocusOnError="true" Operator="GreaterThanEqual"
+                            Type="Date" SetFocusOnError="true" Operator="LessThanEqual"
                             Text="Registration closing date must be earlier than start date."></asp:CompareValidator><br />
                     </div>
 

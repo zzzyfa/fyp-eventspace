@@ -38,33 +38,29 @@
 
             </asp:ListView>
             <asp:DataPager ID="Number1" runat="server" PagedControlID="ListView1" PageSize="1"></asp:DataPager>
-            <%--<h2>Sales Reports for</h2>--%>
+
         </div>
         <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey; margin-bottom: 30px" />
-       <label style="margin-bottom: 10px">Search Keyword: </label>
-            &nbsp<asp:Label runat="server" ID="lblSearch"></asp:Label>
-                <asp:TextBox ID="txtSearch" runat="server" class="form-control" placeholder="Enter name..."></asp:TextBox>
-                    <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary btn-lg" OnClick="btnSearch_Click" />  &nbsp&nbsp&nbsp
+        <label style="margin-bottom: 10px">Search Keyword: </label>
+        &nbsp<asp:Label runat="server" ID="lblSearch"></asp:Label>
+        <asp:TextBox ID="txtSearch" runat="server" class="form-control" placeholder="Enter name..."></asp:TextBox>
+        <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary btn-lg" OnClick="btnSearch_Click" />
+        &nbsp&nbsp&nbsp
                 <asp:Button ID="btnReload" runat="server" Text="Reload" class="btn btn-primary btn-lg" OnClick="btnReload_Click" />
-        
-        <div class="col-sm-12 overauto" style="margin-top:30px">
-            <%--<%if (shirt == "Y" && food == "Y")
-                { %>--%>
-            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting" >
+
+        <div class="col-sm-12 overauto" style="margin-top: 30px">
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="user_id" HeaderText="ID" ReadOnly="True" SortExpression="event_id" InsertVisible="False" ItemStyle-Width="50px" HeaderStyle-Font-Underline="true" />
-
                     <asp:BoundField DataField="payment_timestamp" HeaderText="Timestamp" SortExpression="payment_timestamp" HeaderStyle-Font-Underline="true" ItemStyle-Width="10%" />
-                    <asp:BoundField DataField="user_name" HeaderText="Full Name" SortExpression="user_name" HeaderStyle-Font-Underline="true"  ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true"  />
+                    <asp:BoundField DataField="user_name" HeaderText="Full Name" SortExpression="user_name" HeaderStyle-Font-Underline="true" ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true" />
                     <asp:BoundField DataField="user_mobile_no" HeaderText="Phone No" SortExpression="user_mobile_no" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="user_email" HeaderText="Email" SortExpression="user_email" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="user_alt_email" HeaderText="Alternate Email" SortExpression="user_alt_email" HeaderStyle-Font-Underline="true" />
-                    
+
                     <asp:BoundField DataField="user_shirt_size" HeaderText="Shirt Size" SortExpression="user_shirt_size" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="user_food" HeaderText="Food Preference" SortExpression="user_food" HeaderStyle-Font-Underline="true" />
-
-
                 </Columns>
                 <EditRowStyle BackColor="#2461BF" />
                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -80,7 +76,8 @@
                     <h4>There are no tickets sold for this event as of now.</h4>
                 </EmptyDataTemplate>
             </asp:GridView>
-            <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-primary btn-lg" OnClick="btnSave_Click" />
+
+
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT p.event_id,  p.payment_timestamp,  p.user_id, c.event_name, u.user_name, u.user_mobile_no, u.user_email, u.user_alt_email, u.user_occupation, u.user_shirt_size, u.user_food FROM EVENTS_PURCHASED AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN USERS AS u ON p.user_id = u.user_id WHERE p.event_id=@custID">
                 <SelectParameters>
                     <asp:QueryStringParameter Name="custID" QueryStringField="id" Type="Int32" />
@@ -93,66 +90,69 @@
 
                 </SelectParameters>
             </asp:SqlDataSource>
-            <div style="margin-top:50px">
-            <div class="col-md-4">
-               
-                <div style="margin-bottom: 5px">
-                        <h4 style="text-decoration:underline">Ticket Totals</h4>
+            <div style="margin-top: 50px">
+                <div class="col-md-4">
+
+                    <div style="margin-bottom: 5px">
+                        <h4 style="text-decoration: underline">Ticket Totals</h4>
                         <br />
                         <asp:Label runat="server" class="media-heading" Style="float: left">Tickets Sold: </asp:Label>
-                      <asp:Label runat="server" ID="lblTickets" class="media-heading" Style="float: right"></asp:Label><br />
+                        <asp:Label runat="server" ID="lblTickets" class="media-heading" Style="float: right"></asp:Label><br />
                     </div>
                     <div style="margin-bottom: 5px">
                         <asp:Label runat="server" class="media-heading" Style="float: left">Total Amount: </asp:Label>
                         <asp:Label runat="server" ID="lblAmount" class="media-heading" Style="float: right"></asp:Label><br />
                     </div>
 
-               
-            </div>
+
                 </div>
-             <div class="col-md-4">
-                    <div style="margin-bottom: 5px">
-                        <h4 style="text-decoration:underline">Summary of Shirt Sizes</h4>
-                        <br />
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size XS: </asp:Label>
-                        <asp:Label runat="server" ID="lblXS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size S: </asp:Label>
-                        <asp:Label runat="server" ID="lblS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
-                        <asp:Label runat="server" ID="lblM" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size L: </asp:Label>
-                        <asp:Label runat="server" ID="lblL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size XL: </asp:Label>
-                        <asp:Label runat="server" ID="lblXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Size XXL: </asp:Label>
-                        <asp:Label runat="server" ID="lblXXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
+            </div>
+            <asp:Panel ID="pnlShirt" runat="server" CssClass="col-md-4">
+
+                <div style="margin-bottom: 5px">
+                    <h4 style="text-decoration: underline">Summary of Shirt Sizes</h4>
                     <br />
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XS: </asp:Label>
+                    <asp:Label runat="server" ID="lblXS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size S: </asp:Label>
+                    <asp:Label runat="server" ID="lblS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
+                    <asp:Label runat="server" ID="lblM" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size L: </asp:Label>
+                    <asp:Label runat="server" ID="lblL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XL: </asp:Label>
+                    <asp:Label runat="server" ID="lblXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XXL: </asp:Label>
+                    <asp:Label runat="server" ID="lblXXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <br />
+                <br />
+            </asp:Panel>
+
+            <asp:Panel ID="pnlFood" runat="server" CssClass="col-md-4">
+
+                <div style="margin-bottom: 5px">
+                    <h4 style="text-decoration: underline">Summary of Food Preference</h4>
                     <br />
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Vegetarian: </asp:Label>
+                    <asp:Label runat="server" ID="lblV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                </div>
+                <div style="margin-bottom: 5px">
+                    <asp:Label runat="server" class="media-heading" Style="float: left">Non-vegetarian: </asp:Label>
+                    <asp:Label runat="server" ID="lblNV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
                 </div>
 
-                <div class="col-md-4">
-                    <div style="margin-bottom: 5px">
-                        <h4 style="text-decoration:underline">Summary of Food Preference</h4>
-                        <br />
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Vegetarian: </asp:Label>
-                        <asp:Label runat="server" ID="lblV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                    <div style="margin-bottom: 5px">
-                        <asp:Label runat="server" class="media-heading" Style="float: left">Non-vegetarian: </asp:Label>
-                        <asp:Label runat="server" ID="lblNV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                    </div>
-                </div>
+            </asp:Panel>
             <br />
             <%--<div>
                     <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>

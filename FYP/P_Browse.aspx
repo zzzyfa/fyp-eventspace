@@ -4,7 +4,7 @@
     <title>Event Catalogue | SoftwareBiz</title>
     <%--<link href="css/style.css" rel="stylesheet" />--%>
     <style type="text/css">
-
+        
     </style>
 </asp:Content>
 

@@ -11,7 +11,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="margin-top: 150px">
+    <div class="container" style="margin-top: 130px">
         <asp:HiddenField ID="HiddenField_Id1" runat="server" />
         <div style="text-align: center">
             <h2>Edit Event</h2>
@@ -59,14 +59,14 @@
                         <div class="row class1s" style="margin-bottom: 40px; margin-top: 40px">
                             <div class="col-md-4">
                                 <label>Start Date <span style="color:red; font-weight:900">*</span></label>
-                                <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="160px" ReadOnly="true" TextMode="DateTime"></asp:TextBox>
+                                <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="250px" ReadOnly="true" ></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="row class1s" style="margin-bottom: 40px; margin-top: 40px">
                             <div class="col-md-4">
                                 <label>End Date <span style="color:red; font-weight:900">*</span></label>
-                                <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="160px" ReadOnly="true" TextMode="DateTime"></asp:TextBox>
+                                <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="250px" ReadOnly="true" ></asp:TextBox>
                             </div>
                         </div>
 
@@ -74,12 +74,12 @@
 
                         <div class="form-group">
                             <label>Start Time <span style="color:red; font-weight:900">*</span></label>
-                            <asp:TextBox ID="txtStartTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="txtStartTime" runat="server" class="form-control" ReadOnly="true" Width="250px"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator9" runat="server" ErrorMessage="This field is required." ControlToValidate="txtStartTime"></asp:RequiredFieldValidator><br />
                         </div>
                         <div class="form-group">
                             <label>End Time <span style="color:red; font-weight:900">*</span></label>
-                            <asp:TextBox ID="txtEndTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="txtEndTime" runat="server" class="form-control" ReadOnly="true" Width="250px"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator10" runat="server" ErrorMessage="This field is required." ControlToValidate="txtEndTime"></asp:RequiredFieldValidator><br />
                         </div>
 
@@ -156,7 +156,7 @@
                 <br />
                 <div class="form-group" style="margin-bottom: 40px;">
                     <label>Registration Closing Date <span style="color:red; font-weight:900">*</span></label>
-                    <asp:TextBox ID="txtRegClose" runat="server" class="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtRegClose" runat="server" class="form-control" Width="250px" ReadOnly="true"></asp:TextBox>
                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator14" runat="server" ErrorMessage="This field is required." ControlToValidate="txtRegClose"></asp:RequiredFieldValidator>
                     <asp:CompareValidator id="CompareValidator2" runat="server" 
      ControlToCompare="txtStartDate" cultureinvariantvalues="true" 

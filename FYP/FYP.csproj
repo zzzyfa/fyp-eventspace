@@ -93,6 +93,7 @@
     <Content Include="dist\jquery-clockpicker.min.js" />
     <Content Include="EO_Create.aspx" />
     <Content Include="EO_Edit.aspx" />
+    <Content Include="EO_MsgHist.aspx" />
     <Content Include="EO_Notify.aspx" />
     <Content Include="EO_ReportDetail.aspx" />
     <Content Include="EO_ReportDetailSearch.aspx" />
@@ -171,6 +172,13 @@
     </Compile>
     <Compile Include="EO_Edit.aspx.designer.cs">
       <DependentUpon>EO_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EO_MsgHist.aspx.cs">
+      <DependentUpon>EO_MsgHist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EO_MsgHist.aspx.designer.cs">
+      <DependentUpon>EO_MsgHist.aspx</DependentUpon>
     </Compile>
     <Compile Include="EO_Notify.aspx.cs">
       <DependentUpon>EO_Notify.aspx</DependentUpon>

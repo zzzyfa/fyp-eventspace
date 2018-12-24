@@ -19,6 +19,12 @@ namespace FYP
         public String custID = "";
         public object HiddenField_Id { get; private set; }
         public String reg = "";
+        DateTime startdate = new DateTime();
+        DateTime enddate = new DateTime();
+        public String start = "";
+        public String end = "";
+        DateTime regclose = new DateTime();
+        public String close = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
@@ -50,41 +56,42 @@ namespace FYP
                                         string itemid = row["event_id"].ToString();
                                         string item_name = row["event_name"].ToString();
                                         string group = row["event_group"].ToString();
-                                        string start_date = row["event_start_date"].ToString();
-                                        string end_date = row["event_end_date"].ToString();
-                                        //DateTime start_date = (DateTime)row["event_start_date"];
-                                        //DateTime end_date = (DateTime)row["event_end_date"];
+                                        
+                                        startdate = (DateTime)row["event_start_date"];
+                                        enddate = (DateTime)row["event_end_date"];
                                         string start_time = row["event_start_time"].ToString();
                                         string end_time = row["event_end_time"].ToString();
                                         string venue = row["event_venue"].ToString();
                                         string formal_descr = row["event_formal_descr"].ToString();
                                         string free = row["event_free"].ToString();
                                         string no_of_p = row["event_no_of_participants"].ToString();
-                                        //string reg_close = row["event_reg_closing_date"].ToString();
-                                        DateTime reg_close = (DateTime)row["event_reg_closing_date"];
+                                        regclose = (DateTime)row["event_reg_closing_date"];
+                                        
                                         string resources = row["event_resources"].ToString();
                                         string remarks = row["event_remarks"].ToString();
                                         string item_price = row["event_price"].ToString();
                                         string item_description = row["event_description"].ToString();
                                         image = row["event_poster"].ToString();
-                                        
+
+                                        start = startdate.ToString("ddd dd MMMM yyyy");
+                                        end = enddate.ToString("ddd dd MMMM yyyy");
+                                        close = regclose.ToString("ddd dd MMMM yyyy");
 
                                         this.HiddenField_Id1.Value = itemid;
                                         this.txtOrgClub.Text = group;
                                         this.txtName.Text = item_name;
                                         this.txtDescr.Text = item_description;
                                         this.txtPrice.Text = item_price;
-                                        this.txtStartDate.Text = start_date;
-                                        this.txtEndDate.Text = end_date;
+                                        this.txtStartDate.Text = start;
+                                        this.txtEndDate.Text = end;
                                         this.txtStartTime.Text = start_time;
                                         this.txtEndTime.Text = end_time;
                                         this.txtVenue.Text = venue;
                                         this.txtFormalDesc.Text = formal_descr;
                                         this.txtNoOfP.Text = no_of_p;
-                                        //this.txtRegClose.Text = reg_close;
-                                        reg = reg_close.ToShortDateString();
-                                        this.txtRegClose.Text = reg.ToString();
-                                        //this.txtResources.Text = resources;
+
+                                        this.txtRegClose.Text = close;
+                                        
                                         this.txtRemarks.Text = remarks;
                                         if (free == "Y")
                                         {
