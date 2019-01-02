@@ -77,7 +77,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
                 <EmptyDataTemplate>
-                    <h4>There are no matches for that keyword.</h4>
+                    <h4>There are no matches for the given keyword.</h4>
                 </EmptyDataTemplate>
             </asp:GridView>
 

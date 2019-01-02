@@ -51,7 +51,7 @@
                             <asp:ListItem Text="Sports" Value="SP"></asp:ListItem>
                             <asp:ListItem Text="Others" Value="OT"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="This field is required." ControlToValidate="drlCategory" InitialValue="-1"></asp:RequiredFieldValidator><br />
+                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlCategory" InitialValue="-1"></asp:RequiredFieldValidator><br />
                         
                     </div>
 
@@ -66,7 +66,7 @@
                     
                     <div class="form-group">
 
-                        <label>Finish Date <span style="color: red; font-weight: 900">*</span></label>
+                        <label>End Date <span style="color: red; font-weight: 900">*</span></label>
 
                         <asp:TextBox ID="txtEndDate" runat="server" class="form-control" TextMode="Date"></asp:TextBox>
 
@@ -76,7 +76,7 @@
                             ControlToCompare="txtStartDate" CultureInvariantValues="true"
                             Display="Dynamic" EnableClientScript="true"
                             ControlToValidate="txtEndDate" ForeColor="Red"
-                            ErrorMessage="Start date must be earlier than finish date."
+                            ErrorMessage="The end date must be after the start date."
                             Type="Date" SetFocusOnError="true" Operator="GreaterThanEqual"
                             Text="Start date must be earlier than finish date."></asp:CompareValidator>
                         <br />
@@ -98,12 +98,13 @@
                         <label>Max Number of Participants <span style="color: red; font-weight: 900">*</span></label>
                         <asp:TextBox ID="txtNoOfP" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator13" runat="server" ErrorMessage="This field is required." ControlToValidate="txtNoOfP"></asp:RequiredFieldValidator><br />
+                        <asp:RangeValidator ID="RangeValidator1" ForeColor="Red" MinimumValue="1" MaximumValue="5000" ControltoValidate="txtNoOfP" ErrorMessage="The value must be between 1 to 5000." runat="server" />
                     </div>
                     
                     <div class="form-group">
                         <label>Venue <span style="color: red; font-weight: 900">*</span></label><br />
                         <label style="font-size: small">If the venue is in APU, enter the preferred room/area.</label>
-                        <label style="font-size: small">Only target number of 100 participants and above can apply for Auditorium.</label>
+                        
                         <asp:TextBox ID="txtVenue" runat="server" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="This field is required." ControlToValidate="txtVenue"></asp:RequiredFieldValidator><br />
                     </div>
@@ -111,8 +112,8 @@
                     <div class="form-group">
                         <label>Event Banner Image <span style="color: red; font-weight: 900">*</span></label>
                         <label style="font-size: small">Kindly ensure your banner is optimized for 851 pixels wide and 315 pixels tall</label>
-                        <asp:FileUpload ID="uploadPic" class="form-control" runat="server" text="Upload a photo" method="post" enctype="multipart/form-data" name="productpic1" />
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please upload a product image." ControlToValidate="uploadPic"></asp:RequiredFieldValidator><br />
+                        <asp:FileUpload ID="uploadPic" class="form-control" runat="server" text="Upload a photo" method="post" enctype="multipart/form-data" name="productpic1" accept=".png,.jpg,.jpeg,.gif" />
+                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please upload an image for the event poster." ControlToValidate="uploadPic"></asp:RequiredFieldValidator><br />
                     </div>
                     <br />
                     <br />
@@ -124,9 +125,14 @@
                     <div class="form-group">
                         <label>Event Background <span style="color: red; font-weight: 900">*</span></label><br />
                         <label style="font-size: small">For admin review. Include aim, agenda, overview, and action plan.</label>
-                        <asp:TextBox ID="txtFormalDesc" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" Height="200px"></asp:TextBox>
+                        <asp:TextBox ID="txtFormalDesc" runat="server" class="form-control" TextMode="MultiLine" Height="200px"></asp:TextBox>
                         <label style="font-size: small; color: grey">Word limit: 1000 words</label>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtFormalDesc"></asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator1"
+                                               runat="server" ControlToValidate="txtFormalDesc"
+                                               ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
+                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                           </asp:RegularExpressionValidator>
                     </div>
                     <br />
                     <div class="form-group">
@@ -135,6 +141,11 @@
                         <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" Height="200px"></asp:TextBox>
                         <label style="font-size: small; color: grey">Word limit: 500 words</label>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator11" runat="server" ErrorMessage="This field is required." ControlToValidate="txtDescr"></asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator2"
+                                               runat="server" ControlToValidate="txtDescr"
+                                               ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
+                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                           </asp:RegularExpressionValidator>
                     </div>
                     <br />
                     <div class="form-group">
@@ -146,6 +157,7 @@
                         <label>Ticket Price <span style="color: red; font-weight: 900">*</span></label>
                         <asp:TextBox ID="txtPrice" step=".01" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="This field is required." ControlToValidate="txtPrice"></asp:RequiredFieldValidator><br />
+                        <asp:RangeValidator ID="RangeValidator2" ForeColor="Red" MinimumValue="0.1" MaximumValue="8000" ControltoValidate="txtPrice" ErrorMessage="The value must be greater than 0" runat="server" />
                     </asp:Panel>
 
                     <div class="form-group">
@@ -156,7 +168,7 @@
                             <asp:ListItem Text="Students Only" Value="Student"></asp:ListItem>
                             <asp:ListItem Text="Staff Only" Value="Staff"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator12" runat="server" ErrorMessage="This field is required." ControlToValidate="drlEligibility" InitialValue="-1"></asp:RequiredFieldValidator><br />
+                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator12" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlEligibility" InitialValue="-1"></asp:RequiredFieldValidator><br />
                     </div>
                     <br />
 
@@ -211,7 +223,7 @@
                     </div>
                     <br />--%>
                      <div class="form-group">
-                        <label>Resources Needed from APU <span style="color:red; font-weight:900"></span></label><br />
+                        <label>Resources Needed from APU (Optional)<span style="color:red; font-weight:900"></span></label><br />
 
                         <label style="font-size: small">For checked items, please make booking at the respective link.</label>
                         <asp:CheckBoxList ID="CheckBoxList1" runat="server">

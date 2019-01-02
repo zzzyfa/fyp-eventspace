@@ -93,6 +93,7 @@
     <Content Include="dist\jquery-clockpicker.min.js" />
     <Content Include="EO_Create.aspx" />
     <Content Include="EO_Edit.aspx" />
+    <Content Include="EO_MsgContent.aspx" />
     <Content Include="EO_MsgHist.aspx" />
     <Content Include="EO_Notify.aspx" />
     <Content Include="EO_ReportDetail.aspx" />
@@ -157,6 +158,7 @@
     <Content Include="SA_ViewPropsAll.aspx" />
     <Content Include="w3layouts-License.txt" />
     <Content Include="Web.config" />
+    <Content Include="xml\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EO_Create.aspx.cs">
@@ -172,6 +174,13 @@
     </Compile>
     <Compile Include="EO_Edit.aspx.designer.cs">
       <DependentUpon>EO_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EO_MsgContent.aspx.cs">
+      <DependentUpon>EO_MsgContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EO_MsgContent.aspx.designer.cs">
+      <DependentUpon>EO_MsgContent.aspx</DependentUpon>
     </Compile>
     <Compile Include="EO_MsgHist.aspx.cs">
       <DependentUpon>EO_MsgHist.aspx</DependentUpon>

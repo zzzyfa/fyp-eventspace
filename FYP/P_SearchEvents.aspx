@@ -111,7 +111,7 @@
 
                     </ItemTemplate>
                     <EmptyDataTemplate>
-                        <h4>There are no events with that name.</h4>
+                        <h4>There are no events that match the given keyword.</h4>
                     </EmptyDataTemplate>
                 </asp:ListView>
                 <%}

@@ -60,7 +60,7 @@
                                 <asp:ListItem Text="XL" Value="XL"></asp:ListItem>
                                 <asp:ListItem Text="XXL" Value="XXL"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="This field is required." ControlToValidate="drlShirt" InitialValue="-1"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlShirt" InitialValue="-1"></asp:RequiredFieldValidator>
 
                         </div>
                         <div class="form-group">
@@ -70,7 +70,7 @@
                                 <asp:ListItem Text="Vegetarian" Value="Vegetarian"></asp:ListItem>
                                 <asp:ListItem Text="Non-vegetarian" Value="Non-vegetarian"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator6" runat="server" ErrorMessage="This field is required." ControlToValidate="drlFood" InitialValue="-1"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator6" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlFood" InitialValue="-1"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
 

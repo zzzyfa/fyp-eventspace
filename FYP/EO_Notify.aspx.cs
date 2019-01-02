@@ -17,14 +17,35 @@ namespace FYP
     public partial class EO_Notify : System.Web.UI.Page
     {
         public String eventID = "";
+        public String custID = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
             {
                 Response.Redirect("Login.aspx");
             }
-        }
+            if (Session["userid"] != null)
+            {
+                custID = getUserID(Session["userid"].ToString());
+             
 
+            }
+        }
+        public static string getUserID(String username)
+        {
+            String userID = "NULL";
+            String query = "Select user_id from users where user_username= '" + username + "'";
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            SqlCommand cm = new SqlCommand(query, conn);
+            SqlDataReader sdr = cm.ExecuteReader();
+            while (sdr.Read())
+            {
+                userID = sdr["user_id"].ToString();
+            }
+
+            return userID;
+        }
         public static string getEventID(String eventname)
         {
             String id = "";
@@ -84,7 +105,7 @@ namespace FYP
                     i = i + 1 - 1; //increment or ++i
                 }
                 read_Email2.Close();
-                conn.Close(); //Close connection                 
+                //conn.Close(); //Close connection                 
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
@@ -101,34 +122,49 @@ namespace FYP
                     mail.Body = txtMessage.Text;
                     client.Send(mail);
                 }
+
+                
+                string recipients = "";
+                for (int u = 0;  u < list_emails.Count; u++)
+                {
+                    //recipients = (list_emails[u].ToString() + "; ");
+                    string value = list_emails[u] as string;
+                    recipients += value + "; ";
+                }
+                
+                string query = "INSERT INTO MESSAGES (message_event_name, message_subject, message_body, message_to, message_timestamp, message_user_id) values (@message_event_name, @message_subject, @message_body, @message_to, @message_timestamp, @message_user_id)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@message_event_name", drlEvent.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@message_subject", txtSubject.Text);
+                cmd.Parameters.AddWithValue("@message_body", txtMessage.Text);
+                cmd.Parameters.AddWithValue("@message_to", recipients.ToString());
+                cmd.Parameters.AddWithValue("@message_timestamp", DateTime.Now.ToString());
+                cmd.Parameters.AddWithValue("@message_user_id", custID.ToString());
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+                
                 lblMsg.Visible = true;
+                HyperLink1.Visible = true;
                 
-                //lbleventid.Text = eventID.ToString();
-
-                
-
-
-
-
-
-
             }
             catch (Exception ex)
             {
                 Response.Write("couldnt send email" + ex.Message);
-            }
-
-
-
-         
-
-            
+            }            
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
             txtSubject.Text = String.Empty;
             txtMessage.Text = String.Empty;
+        }
+
+        protected void HyperLink1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EO_MsgHist.aspx?custid="+custID);
         }
     }
 }

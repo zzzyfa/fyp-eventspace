@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="User.master" AutoEventWireup="true" CodeFile="EO_Notify.aspx.cs" Inherits="FYP.EO_Notify" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Notify Participants | SoftwareBiz</title>
+    <title>Message Participants | EventSpace</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/github.min.css" rel="stylesheet" />
     <link href="dist/bootstrap-clockpicker.min.css" rel="stylesheet" />
@@ -14,9 +14,10 @@
     <div class="container">
         <div style="text-align: center; margin-top: 100px">
             
-                        <asp:Label runat="server" Text="Success! Your message has been sent." ForeColor="green" ID="lblMsg" CssClass="highlight" Visible="false"></asp:Label><br /><br />
+                        <asp:Label runat="server" Text="Success! Your message has been sent." ForeColor="green" ID="lblMsg" CssClass="highlight" Visible="false"></asp:Label>
+            <asp:LinkButton ID="HyperLink1" runat="server" OnClick="HyperLink1_Click" Visible="false"><u>View Message History</u></asp:LinkButton><br /><br />
                             
-            <h2>Notify Participants</h2>
+            <h2>Message Participants</h2>
 
         </div>
         <div class="row contact-wrap">

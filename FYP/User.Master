@@ -79,7 +79,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <%--?custid=<%=custID %>--%>
                                             <li><a href="EO_ViewEvents.aspx?custid=<%=custID %>">Submitted Events</a></li>
                                             <li><a href="EO_ViewReports.aspx?custid=<%=custID %>">Sales Reports</a></li>
-                                            <li><a href="EO_Notify.aspx?custid=<%=custID %>">Notify</a></li>
+                                            <li><a href="EO_Notify.aspx?custid=<%=custID %>">Send Message</a></li>
+                                            <li><a href="EO_MsgHist.aspx?custid=<%=custID %>">Message History</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
