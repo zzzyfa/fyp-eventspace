@@ -27,7 +27,7 @@
                         <div>
                             <h3>Order Summary</h3>
                             <hr />
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([event_id] = @prodID)">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_poster, event_id, event_name, event_venue, event_price, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date, event_start_time, event_end_time FROM [EVENTS_CREATED] WHERE ([event_id] = @prodID)">
                                 <SelectParameters>
                                     <asp:QueryStringParameter Name="prodID" QueryStringField="prodID" Type="Int32" />
                                 </SelectParameters>
@@ -39,41 +39,12 @@
                                     </div>
                                 </LayoutTemplate>
                                 <ItemTemplate>
-                                    <%--<div>
-                                        <h4 style="font-weight: bold"><%# Eval("event_name")%></h4>
-                                        <div class="col-md-3">
-                                            <img src="upload/<%# Eval("event_poster") %>" class="img-responsive" height="100" width="100">
-                                        </div>
-
-                                        <div style="float: right; width: 200px">
-                                            <div>
-                                                <h5 class="media-heading" style="float: left">Date: </h5>
-                                                <h5 class="media-heading" style="float: right"><%# Eval("event_start_date") %> - <%# Eval("event_end_date") %></h5>
-                                            </div>
-                                            <br />
-                                            <div>
-                                                <h5 class="media-heading" style="float: left">Time: </h5>
-                                                <h5 class="media-heading" style="float: right"><%# Eval("event_start_time") %> - <%# Eval("event_end_time") %></h5>
-                                            </div>
-                                            <br />
-                                            <div>
-                                                <h5 class="media-heading" style="float: left">Venue: </h5>
-                                                <h5 class="media-heading" style="float: right"><%# Eval("event_venue") %></h5>
-                                            </div>
-                                            <br />
-                                            <div>
-                                                <h5 class="media-heading" style="float: left">Ticket Price: </h5>
-                                                <h5 class="media-heading" style="float: right">RM <%# Eval("event_price")%></h5>
-                                            </div>
-                                            <br />
-
-                                        </div>
-                                    </div>--%>
+                               
                                     <ul class="portfolio-area">
                                         <li class="portfolio-item" style="width: 100%">
                                             <div>
                                                 <span class="image-block block2" style="float: left">
-                                                    <img src="upload/<%# Eval("event_poster")%>" class="img-responsive" style="width: 150px; height: auto; overflow: hidden">
+                                                    <img src="upload/<%# Eval("event_poster")%>" class="img-responsive" style="width: 250px; height: auto; overflow: hidden">
                                                 </span>
 
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="port-info" style="float: right;">
@@ -93,13 +64,15 @@
                                 </ItemTemplate>
                             </asp:ListView>
                         </div>
+                        <br />
                         <div class="form-group" style="margin-top:20px">
                             <br />
                             <br />
-
+                            <br />
                             <asp:Button ID="btnPurchHist" runat="server" Text="View Web Ticket" class="btn btn-primary btn-lg" OnClick="btnPurchHist_Click" />
 
                         </div>
+                        <br />
                     </div>
                 </div>
 

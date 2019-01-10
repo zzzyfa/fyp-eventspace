@@ -26,29 +26,7 @@ namespace FYP
             }
             Session["userOccu"] = custOccu;
 
-            hiddenToday.Value = DateTime.Today.ToShortDateString();
-
-            //string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            //SqlConnection conn = new SqlConnection(constr);
-            //conn.Open();
-            //SqlCommand cm = new SqlCommand("SELECT * FROM EVENTS_CREATED", conn);
-            //SqlDataReader sdr = cm.ExecuteReader();
-            //while (sdr.Read())
-            //{
-
-                
-            //    //startdate = sdr["event_start_date"].ToString();
-            //    startdate = (DateTime)sdr["event_start_date"];
-            //    enddate = (DateTime)sdr["event_end_date"];
-               
-
-            //}
-
-            //start = startdate.ToString("dd MMMM, yyyy");
-            //end = enddate.ToString("dd MMMM, yyyy");
-
-
-
+            
         }
         public static string getUserOccu(String username)
         {

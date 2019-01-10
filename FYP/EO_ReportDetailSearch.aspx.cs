@@ -30,10 +30,10 @@ namespace FYP
                 string key = Request.QueryString["key"];
                 lblSearch.Text = key;
 
-                lblTickets.Text = this.GridView2.Rows.Count.ToString();
-                string count = this.GridView2.Rows.Count.ToString();
-                string price = "";
-                decimal totalamount = 0;
+                //lblTickets.Text = this.GridView2.Rows.Count.ToString();
+                //string count = this.GridView2.Rows.Count.ToString();
+                //string price = "";
+                //decimal totalamount = 0;
                 string id = Request.QueryString["id"];
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 SqlConnection conn = new SqlConnection(constr);
@@ -42,12 +42,13 @@ namespace FYP
                 SqlDataReader sdr = cm.ExecuteReader();
                 while (sdr.Read())
                 {
-                    price = sdr["event_price"].ToString();
-                    shirt = Convert.ToInt32(sdr["event_shirt"]);
-                    food = Convert.ToInt32(sdr["event_food"]);
+                    //price = sdr["event_price"].ToString();
+                    //shirt = Convert.ToInt32(sdr["event_shirt"]);
+                    //food = Convert.ToInt32(sdr["event_food"]);
                 }
-                totalamount = Convert.ToDecimal(price) * Convert.ToDecimal(count);
-                lblAmount.Text = totalamount.ToString();
+                //totalamount = Convert.ToDecimal(price) * Convert.ToDecimal(count);
+                //lblAmount.Text = totalamount.ToString();
+
 
 
             }
@@ -64,24 +65,24 @@ namespace FYP
             cmd.Parameters.AddWithValue("@full_name", key);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            while (sdr.Read())
-            {
+            //SqlDataReader sdr = cmd.ExecuteReader();
+            //while (sdr.Read())
+            //{
 
-                shirt = Convert.ToInt32(sdr["event_shirt"]);
-                food = Convert.ToInt32(sdr["event_food"]);
-            }
+            //    shirt = Convert.ToInt32(sdr["event_shirt"]);
+            //    food = Convert.ToInt32(sdr["event_food"]);
+            //}
 
-            if (shirt == 0)
-            {
-                GridView2.Columns[6].Visible = false;
-                pnlShirt.Visible = false;
-            }
-            if (food == 0)
-            {
-                GridView2.Columns[7].Visible = false;
-                pnlFood.Visible = false;
-            }
+            //if (shirt == 0)
+            //{
+            //    GridView2.Columns[6].Visible = false;
+            //    pnlShirt.Visible = false;
+            //}
+            //if (food == 0)
+            //{
+            //    GridView2.Columns[7].Visible = false;
+            //    pnlFood.Visible = false;
+            //}
 
 
             con.Close();

@@ -45,16 +45,14 @@
                             <label>Category <span style="color:red; font-weight:900">*</span></label>
                             <asp:DropDownList ID="drlCategory" runat="server" class="form-control">
                                 <asp:ListItem Enabled="true" Text="Select Category" Value="-1"></asp:ListItem>
-                                <asp:ListItem Text="Business" Value="BS"></asp:ListItem>
-                                <asp:ListItem Text="IT" Value="IT"></asp:ListItem>
-                                <asp:ListItem Text="Engineering" Value="EG"></asp:ListItem>
-                                <asp:ListItem Text="Sports" Value="SP"></asp:ListItem>
-                                <asp:ListItem Text="Others" Value="OT"></asp:ListItem>
+                            <asp:ListItem Text="Talks/Workshops" Value="TW"></asp:ListItem>
+                            <asp:ListItem Text="Competition" Value="CO"></asp:ListItem>
+                            <asp:ListItem Text="Entertainment" Value="EN"></asp:ListItem>
+                            <asp:ListItem Text="Sports" Value="SP"></asp:ListItem>
+                            <asp:ListItem Text="Others" Value="OT"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlCategory" InitialValue="-1"></asp:RequiredFieldValidator><br />
+                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose a value from the dropdown." ControlToValidate="drlCategory" InitialValue="-1"></asp:RequiredFieldValidator>
                         </div>
-
-
 
                         <div class="row class1s" style="margin-bottom: 40px; margin-top: 40px">
                             <div class="col-md-4">
@@ -126,7 +124,7 @@
                          <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator1"
                                                runat="server" ControlToValidate="txtFormalDesc"
                                                ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
-                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,1000}">
                                            </asp:RegularExpressionValidator>
                 </div>
                 <br />
@@ -134,12 +132,12 @@
                     <label>Event Description <span style="color:red; font-weight:900">*</span></label><br />
                     <label style="font-size: small">For target audience</label>
                     <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" Height="200px" ></asp:TextBox>
-                    <label style="font-size: small; color: grey">Word limit: 500 words</label>
+                    <label style="font-size: small; color: grey">Word limit: 1000 words</label>
                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator11" runat="server" ErrorMessage="This field is required." ControlToValidate="txtDescr"></asp:RequiredFieldValidator><br />
                          <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator2"
                                                runat="server" ControlToValidate="txtDescr"
                                                ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
-                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,1000}">
                                            </asp:RegularExpressionValidator>
                 </div>
                 <br />
@@ -172,14 +170,45 @@
                     <asp:TextBox ID="txtRegClose" runat="server" class="form-control" Width="250px" ReadOnly="true"></asp:TextBox>
                    <br />
                 </div>
-                <%--<div class="form-group">
-                    <label>Resources Needed from APU <span style="color:red; font-weight:900">*</span></label><br />
-                    <label style="font-size: small">PA System, Transportation, Tables, etc. If none, please type "N/A".</label>
-                    <asp:TextBox ID="txtResources" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
-                    <label style="font-size: small; color: grey">Word limit: 500 words</label>
-                    <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator15" runat="server" ErrorMessage="This field is required." ControlToValidate="txtResources"></asp:RequiredFieldValidator><br />
-                </div>
-                <br />--%>
+            <div class="form-group">
+                        <asp:CheckBox ID="chkShirt" runat="server" Text="Ask for participants' shirt size." />
+
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <asp:CheckBox ID="chkFood" runat="server" Text="Ask for participants' food preference." />
+
+                    </div>
+                    <br />
+                    <br />
+                    <label>Contact Person <span style="color: red; font-weight: 900">*</span></label><br />
+                    <label style="font-size: small">To receive enquiries from the audience.</label>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <asp:TextBox ID="txtContactName" runat="server" class="form-control" placeholder="Name" ></asp:TextBox>
+                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator18" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactName"></asp:RequiredFieldValidator><br />   
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <asp:TextBox ID="txtContactNo" runat="server" TextMode="Number" class="form-control" placeholder="Phone No." ></asp:TextBox>
+                           <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator16" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactNo"></asp:RequiredFieldValidator><br />
+                        </div>
+                        <br />
+                         
+                            
+                    </div>
+                    <br />
+                    <br />
+                    
+                      <div class="form-group">
+                        <label>Link to Organiser Facebook Page (Optional)</label><br />
+                        
+                        
+                        <asp:TextBox ID="txtLink" runat="server" class="form-control"></asp:TextBox>
+                        
+                    </div>
+                    <br />
                      <div class="form-group">
                         <label>Resources Needed from APU (Optional) <span style="color:red; font-weight:900"></span></label><br />
 
@@ -198,10 +227,15 @@
                     <label>Additional Remarks (Optional)</label><br />
                     <asp:TextBox ID="txtRemarks" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
                     <label style="font-size: small; color: grey">Word limit: 500 words</label>
+                    <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator3"
+                                               runat="server" ControlToValidate="txtRemarks"
+                                             Text="Please enter maximum 500 words." 
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,500}" />
                 </div>
                 <br />
                 <div class="form-group" style="margin-top: 30px; margin-bottom:30px">
                     <asp:Button ID="btnUpdate" runat="server" Text="Save Changes" class="btn btn-primary btn-lg" OnClick="btnUpdate_Click" />
+                    <asp:Label ID="lblError" runat="server" Text="Please double check your fields before submitting." ForeColor="gray" ></asp:Label>
                 </div>
                 </div>
                 <div class="col-sm-3" style="margin-bottom: 50px"></div>

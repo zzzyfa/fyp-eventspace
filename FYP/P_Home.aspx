@@ -16,14 +16,14 @@
     <section id="main-slider" class="no-margin">
         <div class="carousel slide" style="margin-top: 100px">
             <div class="carousel-inner">
-                <div class="item active shade" style="background-image: url(images/apu_bg.jpg); opacity: 80;">
+                <div class="item active shade" style="background-image: url(images/apu_bg.jpg); opacity: 80; height:400px">
                     <div class="container">
-                        <div class="row slide-margin">
+                        <%--<div class="row slide-margin">--%>
                             <div class="col-sm-6">
-                                <div class="carousel-content">
+                                <div class="carousel-content" >
                                     <h2 class="animation animated-item-1">Welcome to<span> EventSpace</span></h2>
-                                    <p class="animation animated-item-2">Find hot happenings in APU!</p>
-                                   <%-- <a class="btn-slide animation animated-item-3" href="AboutUs.aspx" style="background-color: darkblue">Read More</a>--%>
+                                    <p class="animation animated-item-2" style="color:white">Find hot happenings in APU!</p>
+                                 
                                 </div>
                             </div>
 
@@ -32,7 +32,7 @@
                                     <img src="images/slider/img3.png" class="img-responsive">
                                 </div>
                             </div>--%>
-                        </div>
+                        <%--</div>--%>
                     </div>
                 </div>
                 <!--/.item-->
@@ -42,10 +42,65 @@
 
         <!--/.carousel-->
     </section>
-    <div class="banner_bottom">
+    
+    <div class="banner_bottom" style="padding:50px 0px 0px 0px">
         <div class="container">
+            <h3 style="text-align:center"><image src="/images/featured2.png" height="50" ></image></h3><br />
+            <h3 class="tittle-w3ls"> This Month's Events</h3>
+             <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
+             <div class="inner_sec_info_wthree_agile">
+            <ul class="portfolio-area" style="margin-top: 50px">
+            <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource2">
+                    <LayoutTemplate>
+                        <div id="itemPlaceHolderContainer" runat="server">
+                            <span id="itemPlaceHolder" runat="server" />
+                        </div>
+                    </LayoutTemplate>
+                    <EmptyDataTemplate>
+                        <h4>Oops, no events this month. Checkout other events <a href="P_Browse.aspx">here</a>.</h4>
+                    </EmptyDataTemplate>
+                    <ItemTemplate>
+                        <li class="portfolio-item2">
+                            <div style="height: 300px; margin-bottom: 40px;">
+                                <span class="image-block block2" style="margin-right: 100px">
+                                  
+                                    <img src="upload/<%# Eval("event_poster")%>" height="200" width="350" alt="Conceit">
+
+                                    <div class="port-info" style="width: 350px; margin-right: 50px">
+                                        <h5 style="text-align:center"><a href="P_EventDetail.aspx?id=<%# Eval("event_id") %>"><%# Eval("event_name")%></a></h5>
+                                      <%--  <p>
+                                            <%# Eval("event_start_date")%> - <%# Eval("event_end_date")%><br />
+                                            <%# Eval("event_start_time")%> - <%# Eval("event_end_time")%><br />
+                                            <%# Eval("event_venue") %>
+                                        </p>--%>
+                                    </div>
+                                        
+                                    </a>
+                                </span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </li>
+                    </ItemTemplate>
+                </asp:ListView>
+                </ul>
+                 <asp:DataPager ID="Number1" runat="server" PagedControlID="ListView2" PageSize="3"> </asp:DataPager>
+            </div>
+            </div>
+        </div>
+
+    <asp:HiddenField ID="HiddenField1" runat="server" Value="approved" />
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_poster, event_category FROM [EVENTS_CREATED] WHERE event_status=@event_status AND event_start_date Between Cast(GETDATE() AS DATE) AND CAST(DATEADD(d, 30, GETDATE()) AS DATE)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="HiddenField1" Name="event_status" PropertyName="Value" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
+
+
+    <div class="banner_bottom" style="background-color:aliceblue;padding:80px 0px 60px 0px">
+        <div class="container" >
             <h3 class="tittle-w3ls">About Us</h3>
-            <hr />
+             <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
             <div class="inner_sec_info_wthree_agile">
                 <div class="help_full">
 

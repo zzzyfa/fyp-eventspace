@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="User.master" AutoEventWireup="true" CodeFile="EO_ReportDetail.aspx.cs" Inherits="FYP.EO_ReportDetail" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <title>View Event Report | EventSpace</title>
@@ -154,6 +156,7 @@
 
             </asp:Panel>
             <br />
+           
             <%--<div>
                     <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
                     <asp:Label runat="server" ID="Label3" class="media-heading" Style="float: right">xx</asp:Label>

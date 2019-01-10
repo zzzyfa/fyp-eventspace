@@ -60,13 +60,13 @@
                     </div>
 
 
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT p.event_id, p.ticket_id, p.user_id, c.event_name, c.event_poster, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date, c.event_start_time, c.event_end_time, c.event_venue FROM EVENTS_PURCHASED AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN USERS AS u ON p.user_id = u.user_id WHERE u.user_id=@custID AND c.event_start_date>=GETDATE()">
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT p.event_id, p.ticket_id, p.user_id, c.event_name, c.event_poster, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date, c.event_start_time, c.event_end_time, c.event_venue FROM EVENTS_PURCHASED AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN USERS AS u ON p.user_id = u.user_id WHERE u.user_id=@custID AND c.event_start_date>=GETDATE() ORDER BY c.event_start_date ASC">
                         <SelectParameters>
                             <asp:QueryStringParameter Name="custID" QueryStringField="custid" Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
 
-                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT p.event_id, p.ticket_id, p.user_id, c.event_name, c.event_poster, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date, c.event_start_time, c.event_end_time, c.event_venue FROM EVENTS_PURCHASED AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN USERS AS u ON p.user_id = u.user_id WHERE u.user_id=@custID AND c.event_start_date<GETDATE()">
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT p.event_id, p.ticket_id, p.user_id, c.event_name, c.event_poster, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date, c.event_start_time, c.event_end_time, c.event_venue FROM EVENTS_PURCHASED AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN USERS AS u ON p.user_id = u.user_id WHERE u.user_id=@custID AND c.event_start_date<GETDATE()  ORDER BY c.event_start_date DESC">
                         <SelectParameters>
                             <asp:QueryStringParameter Name="custID" QueryStringField="custid" Type="Int32" />
                         </SelectParameters>

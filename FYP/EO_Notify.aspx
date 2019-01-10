@@ -31,7 +31,7 @@
                     
                     
                     <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey; margin-bottom: 30px" />
-
+                    <label style="margin-bottom: 30px"><span style="color: red; font-weight: 900">*</span> <span style="font-weight: 400">Required</span></label>
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id) AND event_status=@event_status AND event_start_date>=GETDATE()">
                         <SelectParameters>
                             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
@@ -40,18 +40,18 @@
                     </asp:SqlDataSource>
                     <div class="form-group" style="margin-bottom: 30px">
                         
-                        <label>Event Name <span style="color: red; font-weight: 900">*</span></label>
+                        <label>To participants of: <span style="color: red; font-weight: 900">*</span></label>
                         <asp:DropDownList ID="drlEvent" runat="server" class="form-control" DataSourceID="SqlDataSource1" DataTextField="event_name" DataValueField="event_name">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator17" runat="server" ErrorMessage="Please choose an event." ControlToValidate="drlEvent" InitialValue="-1"></asp:RequiredFieldValidator><br />
                         
                      
-                        <label>Subject <span style="color: red; font-weight: 900">*</span></label>
+                        <label>Subject: <span style="color: red; font-weight: 900">*</span></label>
                         <asp:TextBox ID="txtSubject" runat="server" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtSubject"></asp:RequiredFieldValidator><br />
 
 
-                        <label>Message <span style="color: red; font-weight: 900">*</span></label><br />
+                        <label>Message: <span style="color: red; font-weight: 900">*</span></label><br />
                         <asp:TextBox ID="txtMessage" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" Height="200px"></asp:TextBox>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator16" runat="server" ErrorMessage="This field is required." ControlToValidate="txtMessage"></asp:RequiredFieldValidator><br />
 

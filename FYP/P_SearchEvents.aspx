@@ -48,15 +48,15 @@
                 <li class="port-filter all active">
                     <a href="#">All</a>
                 </li>
-                <li class="BS">
-                    <a href="#" title="Category 1">Business</a>
-                </li>
-                <li class="IT">
-                    <a href="#" title="Category 2">IT</a>
-                </li>
-                <li class="EG">
-                    <a href="#" title="Category 3">Engineering</a>
-                </li>
+                 <li class="TW">
+                        <a href="#" title="Category 1">Talks/Workshops</a>
+                    </li>
+                    <li class="CO">
+                        <a href="#" title="Category 2">Competition</a>
+                    </li>
+                    <li class="EN">
+                        <a href="#" title="Category 3">Entertainment</a>
+                    </li>
                 <li class="SP">
                     <a href="#" title="Category 3">Sports</a>
                 </li>
@@ -145,7 +145,7 @@
 
                     </ItemTemplate>
                     <EmptyDataTemplate>
-                        <h4>There are no events with that name.</h4>
+                        <h4>There are no events that match the given keyword.</h4>
                     </EmptyDataTemplate>
                 </asp:ListView>
                 <%} %>

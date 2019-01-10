@@ -39,23 +39,7 @@ namespace FYP
 
         }
 
-        private string ConvertSortDirectionToSql(SortDirection sortDirection)
-        {
-            string newSortDirection = "DESC";
-
-            switch (sortDirection)
-            {
-                case SortDirection.Ascending:
-                    newSortDirection = "ASC";
-                    break;
-
-                case SortDirection.Descending:
-                    newSortDirection = "DESC";
-                    break;
-            }
-
-            return newSortDirection;
-        }
+       
 
         protected void gridView_Sorting(object sender, GridViewSortEventArgs e)
         {

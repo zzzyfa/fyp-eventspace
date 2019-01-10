@@ -8,6 +8,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/highlight.min.js"></script>
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -58,19 +59,25 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <div class="form-group" style="margin-bottom: 30px">
-                                
+                                <div style="border:1px solid gray; padding:10px 10px 10px 10px">
                                 <label>Subject :</label>
                                 <br />
                                  <%# Eval("message_subject") %>
                                 <br />
+                                    </div>
                                 <br />
+                                 <div style="border:1px solid gray; padding:10px 10px 10px 10px">
                                 <label>Recipients : </label><br />
                                 <%# Eval("message_to") %>
                                 <br />
+                                     </div>
                                 <br />
+                                 <div style="border:1px solid gray; padding:10px 10px 10px 10px">
                                 <label>Message : </label><br />
-                                <%# Eval("message_body") %>
+                                
+                                <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" ReadOnly="true" Wrap="true" Text='<%# Eval("message_body")%>' BorderStyle="None" BorderWidth="0" Rows="15" Width="100%"></asp:TextBox>
                                 <br />
+                                     </div>
                                 <br />
                                 
 

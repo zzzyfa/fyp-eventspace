@@ -24,11 +24,9 @@ namespace FYP
                 Response.Redirect("Login.aspx");
             }
             else if (!Page.IsPostBack)
-
             {
                 refreshdata();
                 
-
                 lblTickets.Text = this.GridView2.Rows.Count.ToString();
                 string count = this.GridView2.Rows.Count.ToString();
                 string price = "";
@@ -47,28 +45,17 @@ namespace FYP
                 }
                 totalamount = Convert.ToDecimal(price) * Convert.ToDecimal(count);
                 lblAmount.Text = totalamount.ToString();
-
-                //if (shirt == "N" )
-                //{
-                //    GridView2.Visible = false;
-                    
-                //}
-
+                
+                //for shirt size                    
                 int countXS = 0;
                 int countS = 0;
                 int countM = 0;
                 int countL = 0;
                 int countXL = 0;
                 int countXXL = 0;
-
                 foreach (GridViewRow gvRow in GridView2.Rows)
-
                 {
-
-                    // if it is bound field, you can directly access through its cell no
-
                     string strShirt = gvRow.Cells[6].Text;
-                    
                     if (strShirt == "XS")
                         countXS++;
                     if (strShirt == "S")
@@ -81,7 +68,6 @@ namespace FYP
                         countXL++;
                     if (strShirt == "XXL")
                         countXXL++;
-
                 }
                 lblXS.Text = countXS.ToString();
                 lblS.Text = countS.ToString();
@@ -90,23 +76,17 @@ namespace FYP
                 lblXL.Text = countXL.ToString();
                 lblXXL.Text = countXXL.ToString();
 
+                //for food preference
                 int countV = 0;
                 int countNV = 0;
-
                 foreach (GridViewRow gvRow in GridView2.Rows)
-
                 {
-
-                    // if it is bound field, you can directly access through its cell no
-
                     string strFood = gvRow.Cells[7].Text;
 
                     if (strFood == "Vegetarian")
                         countV++;
                     if (strFood == "Non-vegetarian")
                         countNV++;
-                    
-
                 }
                 lblV.Text = countV.ToString();
                 lblNV.Text = countNV.ToString();
@@ -115,7 +95,6 @@ namespace FYP
         }
 
 
-        
 
 
         public void refreshdata()
@@ -124,18 +103,19 @@ namespace FYP
             SqlConnection con = new SqlConnection
                 (ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             SqlCommand cmd = new SqlCommand
-            //("SELECT * FROM [EVENTS_CREATED] WHERE event_id=" + custID, con);
-            ("SELECT p.event_id,  p.payment_timestamp,  p.user_id, c.event_name, c.event_shirt, c.event_food, u.user_name, u.user_mobile_no, u.user_email, u.user_alt_email, u.user_occupation, u.user_shirt_size, u.user_food FROM [EVENTS_PURCHASED] AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN [USERS] AS u ON p.user_id = u.user_id WHERE p.event_id =" + custID, con);
+            ("SELECT p.event_id,  p.payment_timestamp,  p.user_id, c.event_name, c.event_shirt, c.event_food, u.user_name, "+
+            "u.user_mobile_no, u.user_email, u.user_alt_email, u.user_occupation, u.user_shirt_size, u.user_food"+
+            " FROM [EVENTS_PURCHASED] AS p INNER JOIN EVENTS_CREATED AS c ON p.event_id = c.event_id INNER JOIN [USERS] AS u "+
+            "ON p.user_id = u.user_id WHERE p.event_id =" + custID, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
+
             while (sdr.Read())
             {
-                
                 shirt = Convert.ToInt32(sdr["event_shirt"]);
                 food = Convert.ToInt32(sdr["event_food"]);
             }
-            
             if (shirt == 0)
             {
                 GridView2.Columns[6].Visible = false;
@@ -146,7 +126,6 @@ namespace FYP
                 GridView2.Columns[7].Visible = false;
                 pnlFood.Visible = false;
             }
-           
 
             con.Close();
             DataTable dt = new DataTable();
@@ -190,6 +169,7 @@ namespace FYP
         }
 
 
-        
+
+
     }
 }

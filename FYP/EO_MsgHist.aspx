@@ -12,6 +12,22 @@
         .hidden {
             display: none;
         }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .overauto {
+            overflow-x: auto;
+        }
     </style>
 </asp:Content>
 
@@ -30,13 +46,14 @@
                     <asp:BoundField DataField="message_timestamp" HeaderText="Timestamp" SortExpression="message_timestamp" HeaderStyle-Font-Underline="true" ItemStyle-Width="10%" />
                     <asp:BoundField DataField="message_event_name" HeaderText="Event Name" SortExpression="message_event_name" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="message_subject" HeaderText="Subject" SortExpression="event_name" HeaderStyle-Font-Underline="true" ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true" />
-                    <asp:BoundField DataField="message_body" HeaderText="Message Body" SortExpression="message_body" HeaderStyle-Font-Underline="true" />
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Message Body">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblDesc" Text="<%# Eval("message_body").ToString().Shorten( 20) %>" />
+                            <div style="width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <asp:Label ID="lblEllipsis" runat="server" Text='<%#Eval("message_body") %>' ToolTip='<%#Eval("message_body") %>'></asp:Label>
+                            </div>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="View" Text="Edit" ControlStyle-CssClass="btn btn-primary" HeaderStyle-Font-Underline="true" />
+                    <asp:ButtonField ButtonType="Button" ControlStyle-Width="100px" HeaderText="Details" Text="View" ControlStyle-CssClass="btn btn-primary" HeaderStyle-Font-Underline="true" />
                 </Columns>
                 <RowStyle BackColor="#EFF3FB" />
                 <EditRowStyle BackColor="#2461BF" />
@@ -57,7 +74,7 @@
         </div>
     </div>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [MESSAGES] WHERE ([message_user_id] = @user_id)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [MESSAGES] WHERE ([user_id] = @user_id) ORDER BY message_id DESC">
         <SelectParameters>
             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
         </SelectParameters>

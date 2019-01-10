@@ -76,8 +76,9 @@
                         <div class="form-group">
 
                             <asp:Button ID="btnProceed" runat="server" Text="Proceed" class="btn btn-primary btn-lg" OnClick="btnProceed_Click" />
-                        </div>
 
+                        </div>
+                        <br />
                     </div>
                     <div class="col-sm-3"></div>
                 </div>

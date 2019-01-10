@@ -45,9 +45,9 @@
                         <label>Event Category <span style="color: red; font-weight: 900">*</span></label>
                         <asp:DropDownList ID="drlCategory" runat="server" class="form-control">
                             <asp:ListItem Enabled="true" Text="Select Category" Value="-1"></asp:ListItem>
-                            <asp:ListItem Text="Business" Value="BS"></asp:ListItem>
-                            <asp:ListItem Text="IT" Value="IT"></asp:ListItem>
-                            <asp:ListItem Text="Engineering" Value="EG"></asp:ListItem>
+                            <asp:ListItem Text="Talks/Workshops" Value="TW"></asp:ListItem>
+                            <asp:ListItem Text="Competition" Value="CO"></asp:ListItem>
+                            <asp:ListItem Text="Entertainment" Value="EN"></asp:ListItem>
                             <asp:ListItem Text="Sports" Value="SP"></asp:ListItem>
                             <asp:ListItem Text="Others" Value="OT"></asp:ListItem>
                         </asp:DropDownList>
@@ -78,7 +78,7 @@
                             ControlToValidate="txtEndDate" ForeColor="Red"
                             ErrorMessage="The end date must be after the start date."
                             Type="Date" SetFocusOnError="true" Operator="GreaterThanEqual"
-                            Text="Start date must be earlier than finish date."></asp:CompareValidator>
+                            Text="The end date must be after the start date."></asp:CompareValidator>
                         <br />
                     </div>
 
@@ -110,8 +110,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Event Banner Image <span style="color: red; font-weight: 900">*</span></label>
-                        <label style="font-size: small">Kindly ensure your banner is optimized for 851 pixels wide and 315 pixels tall</label>
+                        <label>Event Poster Image <span style="color: red; font-weight: 900">*</span></label>
+                        <label style="font-size: small">Kindly ensure your poster is optimized for 851 pixels wide and 315 pixels tall</label>
                         <asp:FileUpload ID="uploadPic" class="form-control" runat="server" text="Upload a photo" method="post" enctype="multipart/form-data" name="productpic1" accept=".png,.jpg,.jpeg,.gif" />
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please upload an image for the event poster." ControlToValidate="uploadPic"></asp:RequiredFieldValidator><br />
                     </div>
@@ -130,8 +130,8 @@
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtFormalDesc"></asp:RequiredFieldValidator><br />
                         <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator1"
                                                runat="server" ControlToValidate="txtFormalDesc"
-                                               ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
-                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                                Text="Please enter maximum 1000 words." 
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,1000}">
                                            </asp:RegularExpressionValidator>
                     </div>
                     <br />
@@ -139,12 +139,12 @@
                         <label>Event Description <span style="color: red; font-weight: 900">*</span></label><br />
                         <label style="font-size: small">This is your message for target audience. Include everything that you would like them to know about the event.</label>
                         <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" Height="200px"></asp:TextBox>
-                        <label style="font-size: small; color: grey">Word limit: 500 words</label>
+                        <label style="font-size: small; color: grey">Word limit: 1000 words</label>
                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator11" runat="server" ErrorMessage="This field is required." ControlToValidate="txtDescr"></asp:RequiredFieldValidator><br />
                         <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator2"
                                                runat="server" ControlToValidate="txtDescr"
-                                               ErrorMessage="Please enter maximum 1000 charachters." Text="Please enter maximum 1000 words." 
-                                                ValidationExpression="^(?:\b\w+\b[\s\r\n]*){1,1000}$">
+                                               Text="Please enter maximum 1000 words." 
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,1000}">
                                            </asp:RegularExpressionValidator>
                     </div>
                     <br />
@@ -184,6 +184,7 @@
                             ErrorMessage="Registration closing date must be earlier than start date."
                             Type="Date" SetFocusOnError="true" Operator="LessThanEqual"
                             Text="Registration closing date must be earlier than start date."></asp:CompareValidator><br />
+                        <%--<asp:CompareValidator ID="CompareValidator1" ForeColor="Red" Operator="GreaterThan" type="Date" ControltoValidate="txtRegClose" ErrorMessage="Registration closing date must be in the future." runat="server" />--%>
                     </div>
 
                     <div class="form-group">
@@ -202,26 +203,29 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <asp:TextBox ID="txtContactName" runat="server" class="form-control" placeholder="Name" ></asp:TextBox>
-                            
+                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator18" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactName"></asp:RequiredFieldValidator><br />   
                         </div>
+                        
+
                         <div class="form-group">
                             <asp:TextBox ID="txtContactNo" runat="server" TextMode="Number" class="form-control" placeholder="Phone No." ></asp:TextBox>
-                           
+                           <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator16" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactNo"></asp:RequiredFieldValidator><br />
                         </div>
-                         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator18" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactName"></asp:RequiredFieldValidator><br />
-                            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator16" runat="server" ErrorMessage="This field is required." ControlToValidate="txtContactNo"></asp:RequiredFieldValidator><br />
+                        <br />
+                         
+                            
                     </div>
                     <br />
-
-                    <%--<div class="form-group">
-                        <label>Resources Needed from APU <span style="color: red; font-weight: 900">*</span></label><br />
-
-                        <label style="font-size: small">PA System, Transportation, Tables, etc. If none, please type "N/A".</label>
-                        <asp:TextBox ID="txtResources" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
-                        <label style="font-size: small; color: grey">Word limit: 500 words</label>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator15" runat="server" ErrorMessage="This field is required." ControlToValidate="txtResources"></asp:RequiredFieldValidator><br />
+                    <br />
+                    <div class="form-group">
+                        <label>Link to Organiser Facebook Page (Optional)</label><br />
+                        
+                        
+                        <asp:TextBox ID="txtLink" runat="server" class="form-control"></asp:TextBox>
+                        
                     </div>
-                    <br />--%>
+                    <br />
+                    
                      <div class="form-group">
                         <label>Resources Needed from APU (Optional)<span style="color:red; font-weight:900"></span></label><br />
 
@@ -234,13 +238,16 @@
                             <asp:ListItem Value="Certificates"> Certificates </asp:ListItem>
                         </asp:CheckBoxList>
                         
-                    </div>
+                    </div>  
                     <br />
                     <div class="form-group">
                         <label>Additional Remarks (Optional)</label><br />
                         <asp:TextBox ID="txtRemarks" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
                         <label style="font-size: small; color: grey">Word limit: 500 words</label>
-
+                        <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator3"
+                                               runat="server" ControlToValidate="txtRemarks"
+                                             Text="Please enter maximum 500 words." 
+                                                ValidationExpression="(((^\s*)*\S+\s+)|(\S+)){1,500}" />
                     </div>
                     <br />
                     <div class="form-group" style="margin-top: 20px; margin-bottom: 50px">

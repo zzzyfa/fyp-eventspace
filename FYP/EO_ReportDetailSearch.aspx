@@ -93,7 +93,7 @@
 
                 </SelectParameters>
             </asp:SqlDataSource>
-            <div style="margin-top:50px">
+           <%-- <div style="margin-top:50px">
             <div class="col-md-4">
                
                 <div style="margin-bottom: 5px">
@@ -152,8 +152,9 @@
                         <asp:Label runat="server" class="media-heading" Style="float: left">Non-vegetarian: </asp:Label>
                         <asp:Label runat="server" ID="Label8" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
                     </div>
-               </asp:Panel>
+               </asp:Panel>--%>
             <br />
+            
             <%--<div>
                     <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
                     <asp:Label runat="server" ID="Label3" class="media-heading" Style="float: right">xx</asp:Label>

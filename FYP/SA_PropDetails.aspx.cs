@@ -15,6 +15,12 @@ namespace FYP
     public partial class SA_PropDetails : System.Web.UI.Page
     {
         private object item_name;
+        DateTime startdate = new DateTime();
+        DateTime enddate = new DateTime();
+        public String start = "";
+        public String end = "";
+        public String close = "";
+        DateTime regclose = new DateTime();
         public string image = "";
         public object HiddenField_Id { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -48,15 +54,18 @@ namespace FYP
                                         string itemid = row["event_id"].ToString();
                                         string item_name = row["event_name"].ToString();
                                         string group = row["event_group"].ToString();
-                                        string start_date = row["event_start_date"].ToString();
-                                        string end_date = row["event_end_date"].ToString();
+                                        string link = row["event_fb_link"].ToString();
+                                        string contactname = row["event_contact_name"].ToString();
+                                        string contactno = row["event_contact_no"].ToString();
+                                        startdate = (DateTime)row["event_start_date"];
+                                        enddate = (DateTime)row["event_end_date"];
                                         string start_time = row["event_start_time"].ToString();
                                         string end_time = row["event_end_time"].ToString();
                                         string venue = row["event_venue"].ToString();
-                                        string formal_descr = row["event_formal_descr"].ToString();
+                                        string formal_descr = row["event_background"].ToString();
                                         string free = row["event_free"].ToString();
                                         string no_of_p = row["event_no_of_participants"].ToString();
-                                        string reg_close = row["event_reg_closing_date"].ToString();
+                                        regclose = (DateTime)row["event_reg_closing_date"];
                                         string resources = row["event_resources"].ToString();
                                         string remarks = row["event_remarks"].ToString();
                                         string item_price = row["event_price"].ToString();
@@ -65,26 +74,34 @@ namespace FYP
                                         string eligibility = row["event_eligibility"].ToString();
                                         string category = row["event_category"].ToString();
                                         string status = row["event_status"].ToString();
+                                        string comments = row["event_comments"].ToString();
+                                        start = startdate.ToString("ddd dd MMMM yyyy");
+                                        end = enddate.ToString("ddd dd MMMM yyyy");
+                                        close = regclose.ToString("ddd dd MMMM yyyy");
 
                                         this.HiddenField_Id1.Value = itemid;
                                         this.txtOrgClub.Text = group;
                                         this.txtName.Text = item_name;
                                         this.txtDescr.Text = item_description;
                                         this.txtPrice.Text = item_price;
-                                        this.txtStartDate.Text = start_date;
-                                        this.txtEndDate.Text = end_date;
+                                        this.txtStartDate.Text = start;
+                                        this.txtEndDate.Text = end;
                                         this.txtStartTime.Text = start_time;
                                         this.txtEndTime.Text = end_time;
                                         this.txtVenue.Text = venue;
                                         this.txtFormalDesc.Text = formal_descr;
                                         this.txtNoOfP.Text = no_of_p;
-                                        this.txtRegClose.Text = reg_close;
+                                        this.txtRegClose.Text = close;
                                         this.txtResources.Text = resources;
                                         this.txtRemarks.Text = remarks;
                                         this.txtCategory.Text = category;
                                         this.txtEligibility.Text = eligibility;
+                                        this.txtComments.Text = comments;
+                                        this.txtLink.Text = link;
+                                        this.txtContactName.Text = contactname;
+                                        this.txtContactNo.Text = contactno;
                                         if (status == "Pending"){
-                                            
+                                            btnUpdate.Visible = false;
                                             }
                                         else
                                         {
@@ -167,6 +184,40 @@ namespace FYP
 
                 Response.Redirect("SA_ViewPropsAll.aspx");
                 System.Diagnostics.Debug.WriteLine("Test7");
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                Response.Write("Error: " + ex.ToString());
+            }
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            
+            SqlConnection con = new
+        SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            
+            try
+            {
+            
+                con.Open();
+
+                string query = "UPDATE EVENTS_CREATED SET event_venue=@event_venue,event_comments=@event_comments WHERE event_id=@itemid";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@itemid", HiddenField_Id1.Value.ToString());
+
+                cmd.Parameters.AddWithValue("@event_venue", txtVenue.Text);
+                
+                cmd.Parameters.AddWithValue("@event_comments", txtComments.Text);
+
+                
+                cmd.ExecuteNonQuery();
+                
+
+                Response.Redirect("SA_ViewPropsAll.aspx");
+                
                 con.Close();
             }
             catch (Exception ex)

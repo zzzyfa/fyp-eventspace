@@ -70,15 +70,11 @@ namespace FYP
         {
             try
             {
-
-                //upon selecting event dropdown, match with event id, check ev_purch table and get all rows with tht event id, go to users table find user of each, get their email, put in string
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 SqlConnection conn = new SqlConnection(constr);
                 conn.Open();
-
                 
                 string eventname = drlEvent.SelectedValue.ToString();
-
                 eventID = getEventID(eventname);
 
                 ArrayList list_emails = new ArrayList();
@@ -87,8 +83,12 @@ namespace FYP
                 string emails = "";
                 string emails2 = "";
 
-                SqlCommand cmd_Email = new SqlCommand("Select u.user_email, u.user_alt_email FROM [EVENTS_PURCHASED] AS p INNER JOIN [USERS] AS u ON p.user_id = u.user_id where p.event_id='" + eventID + "'", conn);
-                SqlCommand cmd_Email2 = new SqlCommand("Select u.user_alt_email FROM [EVENTS_PURCHASED] AS p INNER JOIN [USERS] AS u ON p.user_id = u.user_id where p.event_id='" + eventID + "'", conn);
+                SqlCommand cmd_Email = new SqlCommand
+                  ("Select u.user_email FROM [EVENTS_PURCHASED] AS p INNER JOIN [USERS] AS u ON p.user_id = u.user_id where p.event_id='"+
+                    eventID+"'",conn);
+                SqlCommand cmd_Email2 = new SqlCommand
+                  ("Select u.user_alt_email FROM [EVENTS_PURCHASED] AS p INNER JOIN [USERS] AS u ON p.user_id = u.user_id where p.event_id='"
+                    + eventID + "'", conn);
                 SqlDataReader read_Email = cmd_Email.ExecuteReader();
                 while (read_Email.Read())
                 {
@@ -102,11 +102,10 @@ namespace FYP
                 {
                     emails2 = read_Email2.GetValue(i).ToString();
                     list_emails.Add(emails2); //Add email to a arraylist
-                    i = i + 1 - 1; //increment or ++i
+                    i = i + 1 - 1; 
                 }
                 read_Email2.Close();
-                //conn.Close(); //Close connection                 
-
+            
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -122,37 +121,33 @@ namespace FYP
                     mail.Body = txtMessage.Text;
                     client.Send(mail);
                 }
-
                 
                 string recipients = "";
                 for (int u = 0;  u < list_emails.Count; u++)
                 {
-                    //recipients = (list_emails[u].ToString() + "; ");
                     string value = list_emails[u] as string;
                     recipients += value + "; ";
                 }
                 
-                string query = "INSERT INTO MESSAGES (message_event_name, message_subject, message_body, message_to, message_timestamp, message_user_id) values (@message_event_name, @message_subject, @message_body, @message_to, @message_timestamp, @message_user_id)";
+                string query = 
+                  "INSERT INTO MESSAGES (message_event_name, message_subject, message_body, message_to, message_timestamp, user_id) "+
+                  "values (@message_event_name, @message_subject, @message_body, @message_to, @message_timestamp, @user_id)";
                 SqlCommand cmd = new SqlCommand(query, conn);
-
                 cmd.Parameters.AddWithValue("@message_event_name", drlEvent.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@message_subject", txtSubject.Text);
                 cmd.Parameters.AddWithValue("@message_body", txtMessage.Text);
                 cmd.Parameters.AddWithValue("@message_to", recipients.ToString());
                 cmd.Parameters.AddWithValue("@message_timestamp", DateTime.Now.ToString());
-                cmd.Parameters.AddWithValue("@message_user_id", custID.ToString());
-
+                cmd.Parameters.AddWithValue("@user_id", custID.ToString());
                 cmd.ExecuteNonQuery();
-
                 conn.Close();
                 
                 lblMsg.Visible = true;
                 HyperLink1.Visible = true;
-                
             }
             catch (Exception ex)
             {
-                Response.Write("couldnt send email" + ex.Message);
+                Response.Write(ex.Message);
             }            
         }
 

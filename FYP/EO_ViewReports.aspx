@@ -38,7 +38,7 @@
                     <asp:BoundField DataField="event_group" HeaderText="Org Group" SortExpression="event_group" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="event_name" HeaderStyle-Font-Underline="true"  ItemStyle-ForeColor="OrangeRed" ItemStyle-Font-Bold="true" />
                     <asp:BoundField DataField="event_start_date" HeaderText="Start Date" SortExpression="event_start_date" HeaderStyle-Font-Underline="true" />
-                    <asp:BoundField DataField="event_start_time" HeaderText="Start Time" SortExpression="event_start_time" HeaderStyle-Font-Underline="true" />
+                    <%--<asp:BoundField DataField="event_start_time" HeaderText="Start Time" SortExpression="event_start_time" HeaderStyle-Font-Underline="true" />--%>
                     <asp:BoundField DataField="event_venue" HeaderText="Venue" SortExpression="event_venue" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="event_price" HeaderText="Price" SortExpression="event_price" HeaderStyle-Font-Underline="true" />
                     <%--tickets sold 
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_group, event_start_time, event_price, event_venue, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date,  FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id)" OnSelecting="SqlDataSource1_Selecting">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_group, event_start_time, event_price, event_venue, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date,  FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE ([user_id] = @user_id) ORDER BY event_id DESC" OnSelecting="SqlDataSource1_Selecting">
         <SelectParameters>
             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
         </SelectParameters>

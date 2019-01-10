@@ -13,7 +13,7 @@ namespace FYP
         {
             if (Session["userid"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("Login2.aspx");
             }
         }
 

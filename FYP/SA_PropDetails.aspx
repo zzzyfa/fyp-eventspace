@@ -47,41 +47,46 @@
                     <div class="form-group">
                         <label>Organising Club:</label>
                         <asp:TextBox ID="txtOrgClub" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator6" runat="server" ErrorMessage="This field is required." ControlToValidate="txtOrgClub"></asp:RequiredFieldValidator><br />
+                      
                     </div>
                     <div class="form-group">
                         <label>Event Name:</label>
                         <asp:TextBox ID="txtName" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="This field is required." ControlToValidate="txtName"></asp:RequiredFieldValidator><br />
+                      
                     </div>
                     <div class="form-group">
                         <label>Category:</label>
                         <asp:TextBox ID="txtCategory" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                          <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator12" runat="server" ErrorMessage="This field is required." ControlToValidate="txtStartTime"></asp:RequiredFieldValidator><br />
+                      
                     </div>
                     <div class="form-group">
                         <label>Start Date:</label>
-                        <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
-                      <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator8" runat="server" ErrorMessage="This field is required." ControlToValidate="txtStartTime"></asp:RequiredFieldValidator><br />
+                        <asp:TextBox ID="txtStartDate" runat="server" class="form-control" Width="200px" ReadOnly="true"></asp:TextBox>
+                      
                     </div>
 
                     <div class="form-group">
                         <label>End Date:</label>
-                        <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="160px" ReadOnly="true"></asp:TextBox>
-                          <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator7" runat="server" ErrorMessage="This field is required." ControlToValidate="txtStartTime"></asp:RequiredFieldValidator><br />
+                        <asp:TextBox ID="txtEndDate" runat="server" class="form-control" Width="200px" ReadOnly="true"></asp:TextBox>
+                        
                     </div>
 
                     <div class="form-group">
                         <label>Start Time:</label>
                         <asp:TextBox ID="txtStartTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator9" runat="server" ErrorMessage="This field is required." ControlToValidate="txtStartTime"></asp:RequiredFieldValidator><br />
+                        
                     </div>
                     <div class="form-group">
                         <label>End Time:</label>
                         <asp:TextBox ID="txtEndTime" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator10" runat="server" ErrorMessage="This field is required." ControlToValidate="txtEndTime"></asp:RequiredFieldValidator><br />
+                        
                     </div>
-
+                    <div class="form-group">
+                        <label>Number of Participants:</label>
+                        <asp:TextBox ID="txtNoOfP" runat="server" TextMode="Number" class="form-control" ReadOnly="true"></asp:TextBox>
+                        
+                    </div>
+                    
                     <div class="form-group">
                         <label>Venue <span style="color:red; font-weight:900">*</span></label>
                         <asp:TextBox ID="txtVenue" runat="server" class="form-control"></asp:TextBox>
@@ -103,26 +108,24 @@
                     </div>
                     <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
                     <div class="form-group">
-                        <label>Formal Event Description:</label><br />
+                        <label>Event Description</label><br />
                         <label style="font-size: small">For admin review.</label>
                         <asp:TextBox ID="txtFormalDesc" runat="server" class="form-control" TextMode="MultiLine" MaxLength="1000" ReadOnly="true" Height="200px"></asp:TextBox>
-                        <label style="font-size: small; color: grey">Word limit: 1000 words</label>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtFormalDesc"></asp:RequiredFieldValidator><br />
+                       
                     </div>
                     <br />
                     <div class="form-group">
                         <label>Event Description:</label><br />
                         <label style="font-size: small">For target audience.</label>
                         <asp:TextBox ID="txtDescr" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" ReadOnly="true" Height="200px"></asp:TextBox>
-                        <label style="font-size: small; color: grey">Word limit: 500 words</label>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator11" runat="server" ErrorMessage="This field is required." ControlToValidate="txtDescr"></asp:RequiredFieldValidator><br />
+                   
                     </div>
                     <br />
                     
                     <div class="form-group">
                         <label>Ticket Price:</label>
                         <asp:TextBox ID="txtPrice" step=".01" runat="server" TextMode="Number" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="This field is required." ControlToValidate="txtPrice"></asp:RequiredFieldValidator><br />
+                    
                     </div>
 
                     <div class="form-group">
@@ -130,20 +133,41 @@
                         <asp:TextBox ID="txtEligibility" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                     </div>
                     <br />
-                    <div class="form-group">
-                        <label>Number of Participants:</label>
-                        <asp:TextBox ID="txtNoOfP" runat="server" TextMode="Number" class="form-control" ReadOnly="true"></asp:TextBox>
-                        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator13" runat="server" ErrorMessage="This field is required." ControlToValidate="txtNoOfP"></asp:RequiredFieldValidator><br />
-                    </div>
-                    <br />
+                    
                     <div class="form-group" style="margin-bottom: 40px;">
                         <label>Registration Closing Date:</label>
                         <asp:TextBox ID="txtRegClose" runat="server" class="form-control" Width="200px" ReadOnly="true"></asp:TextBox>
                     </div>
+
+                    <label>Contact Person:</label><br />
+                    <label style="font-size: small">To receive enquiries from the audience.</label>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <asp:TextBox ID="txtContactName" runat="server" class="form-control" placeholder="Name" ReadOnly="true" ></asp:TextBox>
+                         
+                        </div>
+                        <div class="form-group">
+                            <asp:TextBox ID="txtContactNo" runat="server" TextMode="Number" class="form-control" placeholder="Phone No." ReadOnly="true" ></asp:TextBox>
+                         
+                        </div>
+                        <br />
+                    </div>
+                    <br />
+                    <br />
+                    
+                      <div class="form-group">
+                        <label>Link to Organiser Facebook Page:</label><br />
+                        
+                        
+                        <asp:TextBox ID="txtLink" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                        
+                    </div>
+                    <br />
+
                     <div class="form-group">
                         <label>Resources Needed from APU:</label><br />
                         <label style="font-size: small">PA System, Transportation, Tables, etc.</label>
-                        <asp:TextBox ID="txtResources" runat="server" class="form-control" TextMode="MultiLine" MaxLength="500" ReadOnly="true"></asp:TextBox>
+                           <asp:TextBox ID="txtResources" runat="server" class="form-control" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
                     </div>
                     <br />
                     <div class="form-group">
@@ -159,6 +183,7 @@
                     <div class="form-group" style="margin-top: 30px; position:center">
                         <asp:Button ID="btnApprove" runat="server" Text="Approve" class="btn btn-primary btn-lg" OnClick="btnApprove_Click" />
                         &nbsp&nbsp&nbsp<asp:Button ID="btnReject" runat="server" Text="Reject" class="btn btn-primary btn-lg" OnClick="btnReject_Click" />
+                           <asp:Button ID="btnUpdate" runat="server" Text="Update" class="btn btn-primary btn-lg" OnClick="btnUpdate_Click" />
                     </div>
                 </div>
 
