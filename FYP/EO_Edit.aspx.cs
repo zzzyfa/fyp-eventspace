@@ -39,7 +39,6 @@ namespace FYP
                 {
                     String contact_id = Request.QueryString["id"];
                     int intTest = Convert.ToInt32(contact_id);
-
                     string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
@@ -52,7 +51,6 @@ namespace FYP
                                 using (DataTable dt = new DataTable())
                                 {
                                     sda.Fill(dt);
-                                    //return dt;
                                     foreach (DataRow row in dt.Rows)
                                     {
                                         string itemid = row["event_id"].ToString();
@@ -70,17 +68,14 @@ namespace FYP
                                         string free = row["event_free"].ToString();
                                         string no_of_p = row["event_no_of_participants"].ToString();
                                         regclose = (DateTime)row["event_reg_closing_date"];
-                                        
                                         string resources = row["event_resources"].ToString();
                                         string remarks = row["event_remarks"].ToString();
                                         string item_price = row["event_price"].ToString();
                                         string item_description = row["event_description"].ToString();
                                         image = row["event_poster"].ToString();
-
                                         start = startdate.ToString("ddd dd MMMM yyyy");
                                         end = enddate.ToString("ddd dd MMMM yyyy");
                                         close = regclose.ToString("ddd dd MMMM yyyy");
-
                                         shirt = Convert.ToInt32(row["event_shirt"]);
                                         food = Convert.ToInt32(row["event_food"]);
 
@@ -100,7 +95,6 @@ namespace FYP
                                         this.txtContactName.Text = contactname;
                                         this.txtContactNo.Text =contactno;
                                         this.txtRegClose.Text = close;
-                                        
                                         this.txtRemarks.Text = remarks;
                                         if (free == "Y")
                                         {
@@ -122,22 +116,15 @@ namespace FYP
                                             chkFood.Checked = true;
                                             
                                         }
-
-
-
-                                        //drlEligibility.SelectedValue = drlEligibility.Items.FindByText(row["event_eligibility"].ToString()).Value;
                                         drlEligibility.SelectedValue = row["event_eligibility"].ToString();
                                         drlCategory.SelectedValue = row["event_category"].ToString();
 
                                         string str = resources;
-
-                                        string[] countries = str.Split(',');
-
-                                        foreach (string country in countries)
+                                        string[] resource = str.Split(',');
+                                        foreach (string res in resource)
                                         {
-                                            CheckBoxList1.Items.FindByValue(country).Selected = true;
+                                            CheckBoxList1.Items.FindByValue(res).Selected = true;
                                         }
-
                                     }
                                     con.Close();
                                 }
@@ -172,32 +159,30 @@ namespace FYP
                 {
                     resources += CheckBoxList1.Items[i].Value + ",";
                 }
-
             }
             resources = resources.TrimEnd(',');
-
-            System.Diagnostics.Debug.WriteLine("Test1");
+            
             SqlConnection con = new
-        SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             System.Diagnostics.Debug.WriteLine("Test2");
             try
             {
-                System.Diagnostics.Debug.WriteLine("Test3");
                 con.Open();
                 if (uploadPic.HasFile)
                 {
                     string file_name = uploadPic.FileName.ToString() + "";
                     uploadPic.PostedFile.SaveAs(Server.MapPath("~/upload/") + file_name);
-                    string query = "UPDATE EVENTS_CREATED SET event_category=@event_category,event_venue=@event_venue, event_poster=@event_poster, event_background=@event_background, " +
-                                    "event_description=@event_description, event_free=@event_free, event_price=@event_price, event_eligibility=@event_eligibility, event_no_of_participants=@event_no_of_participants, " +
-                                    " event_resources=@event_resources, event_remarks=@event_remarks, event_shirt=@event_shirt, event_food=@event_food, event_contact_name=@event_contact_name,"+
-                                    " event_contact_no=@event_contact_no, event_fb_link=@event_fb_link WHERE event_id=@itemid";
+                    string query = "UPDATE EVENTS_CREATED SET event_category=@event_category,event_venue=@event_venue, "+
+                        "event_poster=@event_poster, event_background=@event_background, event_description=@event_description,"+
+                        " event_free=@event_free, event_price=@event_price, event_eligibility=@event_eligibility, "+
+                        "event_no_of_participants=@event_no_of_participants, event_resources=@event_resources, "+
+                        "event_remarks=@event_remarks, event_shirt=@event_shirt, event_food=@event_food, "+
+                        "event_contact_name=@event_contact_name, event_contact_no=@event_contact_no, "+
+                        "event_fb_link=@event_fb_link WHERE event_id=@itemid";
                     SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@itemid", HiddenField_Id1.Value.ToString());
                     cmd.Parameters.AddWithValue("@event_group", txtOrgClub.Text);
                     cmd.Parameters.AddWithValue("@event_name", txtName.Text);
                     cmd.Parameters.AddWithValue("@event_category", drlCategory.SelectedValue.ToString());
-                  
                     cmd.Parameters.AddWithValue("@event_venue", txtVenue.Text);
                     cmd.Parameters.AddWithValue("@event_background", txtFormalDesc.Text);
                     cmd.Parameters.AddWithValue("@event_description", txtDescr.Text);
@@ -228,29 +213,18 @@ namespace FYP
                     {
                         cmd.Parameters.AddWithValue("@event_food", 0);
                     }
-                    cmd.Parameters.AddWithValue("@event_no_of_participants", txtNoOfP.Text);
-                 
+                    cmd.Parameters.AddWithValue("@event_no_of_participants", txtNoOfP.Text);                 
                     cmd.Parameters.AddWithValue("@event_eligibility", drlEligibility.SelectedValue.ToString());
                     cmd.Parameters.AddWithValue("@event_remarks", txtRemarks.Text);
                     cmd.Parameters.AddWithValue("@event_contact_name", txtContactName.Text);
                     cmd.Parameters.AddWithValue("@event_contact_no", txtContactNo.Text);
                     cmd.Parameters.AddWithValue("@event_fb_link", txtLink.Text);
                     cmd.Parameters.AddWithValue("@event_resources", resources);
-
-
                     cmd.Parameters.AddWithValue("@event_poster", file_name);
-
-                    System.Diagnostics.Debug.WriteLine("Test5");
                     cmd.ExecuteNonQuery();
-                    System.Diagnostics.Debug.WriteLine("Test6");
-
-                    if (Session["userid"] != null)
-                    {
-                        custID = getUserID(Session["userid"].ToString());
-                    }
-
+                    
+                    custID = getUserID(Session["userid"].ToString());
                     Response.Redirect("EO_ViewEvents.aspx?custid=" + custID);
-                    System.Diagnostics.Debug.WriteLine("Test7");
                     con.Close();
                 }else
                 {

@@ -113,14 +113,14 @@
 
 
 
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_poster, event_category, event_venue, event_start_time, event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE event_status=@event_status AND event_start_date>=GETDATE()">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT event_id, event_name, event_poster, event_category, event_venue, event_start_time, event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE event_status=@event_status AND event_start_date>=GETDATE()  ORDER BY event_id DESC">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="HiddenField1" Name="event_status" PropertyName="Value" Type="String" />
                 </SelectParameters>
             </asp:SqlDataSource>
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-                SelectCommand="SELECT event_id, event_name, event_poster, event_category, event_venue, event_start_time,event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE (event_eligibility=@event_eligibility or event_eligibility=@event_eligibility2) AND event_status=@event_status AND event_start_date>=GETDATE()">
+                SelectCommand="SELECT event_id, event_name, event_poster, event_category, event_venue, event_start_time,event_end_time, FORMAT (event_start_date, 'ddd dd MMM yyyy') as event_start_date, FORMAT (event_end_date, 'ddd dd MMM yyyy') as event_end_date  FROM [EVENTS_CREATED] WHERE (event_eligibility=@event_eligibility or event_eligibility=@event_eligibility2) AND event_status=@event_status AND event_start_date>=GETDATE() ORDER BY event_id DESC">
                 <SelectParameters>
                     <asp:SessionParameter Name="event_eligibility" SessionField="userOccu" Type="String" />
                     <asp:ControlParameter ControlID="HiddenField1" Name="event_status" PropertyName="Value" Type="String" />

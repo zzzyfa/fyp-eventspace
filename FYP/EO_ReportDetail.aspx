@@ -39,6 +39,7 @@
                 </ItemTemplate>
 
             </asp:ListView>
+            
             <asp:DataPager ID="Number1" runat="server" PagedControlID="ListView1" PageSize="1"></asp:DataPager>
 
         </div>
@@ -46,10 +47,14 @@
         <label style="margin-bottom: 10px">Search Keyword: </label>
         &nbsp<asp:Label runat="server" ID="lblSearch"></asp:Label>
         <asp:TextBox ID="txtSearch" runat="server" class="form-control" placeholder="Enter name..."></asp:TextBox>
+        <div style="margin-top:10px">
         <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary btn-lg" OnClick="btnSearch_Click" />
         &nbsp&nbsp&nbsp
-                <asp:Button ID="btnReload" runat="server" Text="Reload" class="btn btn-primary btn-lg" OnClick="btnReload_Click" />
-
+        <asp:Button ID="btnReload" runat="server" Text="Reload" class="btn btn-primary btn-lg" OnClick="btnReload_Click"  />
+        <div style="float:right">
+        <asp:Button ID="btnExport" runat="server" Text="Export into CSV" class="btn btn-primary btn-lg" OnClick="btnExport_Click" BackColor="Green" BorderColor="Green"/>        
+            </div>
+        </div>
         <div class="col-sm-12 overauto" style="margin-top: 30px">
             <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive" DataKeyNames="event_id" GridLines="None" AllowPaging="True" AllowSorting="true" OnSorting="gridView_Sorting">
                 <AlternatingRowStyle BackColor="White" />
@@ -105,68 +110,59 @@
                         <asp:Label runat="server" class="media-heading" Style="float: left">Total Amount: </asp:Label>
                         <asp:Label runat="server" ID="lblAmount" class="media-heading" Style="float: right"></asp:Label><br />
                     </div>
-
-
                 </div>
             </div>
-            <asp:Panel ID="pnlShirt" runat="server" CssClass="col-md-4">
 
-                <div style="margin-bottom: 5px">
+            
+            <asp:Panel ID="pnlShirt" runat="server" CssClass="col-md-4">
+                <div style="text-align: center; margin-bottom: 5px">
                     <h4 style="text-decoration: underline">Summary of Shirt Sizes</h4>
                     <br />
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XS: </asp:Label>
-                    <asp:Label runat="server" ID="lblXS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                    <asp:Chart ID="ChartShirt" runat="server" Width="350px">
+                        <Series>
+                            <asp:Series Name="SeriesShirt" XValueMember="MonthName" YValueMembers="Mavailable" Font="Trebuchet, 10pt">
+                            </asp:Series>
+                        </Series>
+                        <ChartAreas>
+                            <asp:ChartArea Name="ChartArea1">
+                                <AxisY Title="Quantity" TitleFont="Arial, 11pt">
+                                    <MajorGrid Enabled="False" />
+                                </AxisY>
+                                <AxisX Title="Shirt Size" TitleFont="Arial, 11pt">
+                                    <MajorGrid Enabled="False" />
+                                </AxisX>
+                            </asp:ChartArea>
+                        </ChartAreas>
+                    </asp:Chart>
                 </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size S: </asp:Label>
-                    <asp:Label runat="server" ID="lblS" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
-                    <asp:Label runat="server" ID="lblM" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size L: </asp:Label>
-                    <asp:Label runat="server" ID="lblL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XL: </asp:Label>
-                    <asp:Label runat="server" ID="lblXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size XXL: </asp:Label>
-                    <asp:Label runat="server" ID="lblXXL" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-                <br />
-                <br />
             </asp:Panel>
 
             <asp:Panel ID="pnlFood" runat="server" CssClass="col-md-4">
-
-                <div style="margin-bottom: 5px">
+                <div style="text-align: center">
                     <h4 style="text-decoration: underline">Summary of Food Preference</h4>
                     <br />
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Vegetarian: </asp:Label>
-                    <asp:Label runat="server" ID="lblV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
+                    <asp:Chart ID="ChartFood" runat="server" Width="350px">
+                        <Series>
+                            <asp:Series Name="SeriesFood" XValueMember="MonthName" YValueMembers="Mavailable" Font="Arial, 10pt">
+                            </asp:Series>
+                        </Series>
+                        <ChartAreas>
+                            <asp:ChartArea Name="ChartArea1">
+                                <AxisY Title="Quantity" TitleFont="Arial, 11pt">
+                                    <MajorGrid Enabled="False" />
+                                </AxisY>
+                                <AxisX Title="Food Preference" TitleFont="Arial, 11pt">
+                                    <MajorGrid Enabled="False" />
+                                </AxisX>
+                            </asp:ChartArea>
+                        </ChartAreas>
+                    </asp:Chart>
                 </div>
-                <div style="margin-bottom: 5px">
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Non-vegetarian: </asp:Label>
-                    <asp:Label runat="server" ID="lblNV" class="media-heading" Style="float: right">xxxxx</asp:Label><br />
-                </div>
-
             </asp:Panel>
-            <br />
-           
-            <%--<div>
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size M: </asp:Label>
-                    <asp:Label runat="server" ID="Label3" class="media-heading" Style="float: right">xx</asp:Label>
-                </div>
-                <br />
-                <div>
-                    <asp:Label runat="server" class="media-heading" Style="float: left">Size L: </asp:Label>
-                    <asp:Label runat="server" ID="Label4" class="media-heading" Style="float: right">xx</asp:Label>
-                </div>
-                <br />--%>
+
+            
+
+
         </div>
 
 

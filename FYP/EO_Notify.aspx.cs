@@ -130,10 +130,10 @@ namespace FYP
                 }
                 
                 string query = 
-                  "INSERT INTO MESSAGES (message_event_name, message_subject, message_body, message_to, message_timestamp, user_id) "+
-                  "values (@message_event_name, @message_subject, @message_body, @message_to, @message_timestamp, @user_id)";
+                  "INSERT INTO MESSAGES (event_id, message_subject, message_body, message_to, message_timestamp, user_id) "+
+                  "values (@event_id, @message_subject, @message_body, @message_to, @message_timestamp, @user_id)";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@message_event_name", drlEvent.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@event_id", eventID);
                 cmd.Parameters.AddWithValue("@message_subject", txtSubject.Text);
                 cmd.Parameters.AddWithValue("@message_body", txtMessage.Text);
                 cmd.Parameters.AddWithValue("@message_to", recipients.ToString());

@@ -73,20 +73,12 @@
                     <h1 style="margin-left: 15px;"><%# Eval("event_name")%></h1>
                     <br />
                     <h4 style="margin-left: 15px;">Organised by <span style="color: orangered; font-weight: bold"><%# Eval("event_group")%></span></h4>
-                   <br />
 
-                   
-                           <h5 style="margin-left: 15px"> <a target="_blank" href="https://facebook.com/sharer.php?u=<%=url %>" >Click to share</a></h5>
-                   
-                   <%-- <ul class="list-inline">
-                        <li>
-                            <a target="_blank" href="<%=url %>" class="social facebook"></a>
-                        </li>
-                        <li></li>
-                    </ul>--%>
+
+
                 </div>
                 <div class="col-md-6">
-                    <hr />
+                    <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
                     <div class="media">
                         <ul>
                             <li>
@@ -118,21 +110,31 @@
                                                              { %> <%# Eval("event_price") %> <%} %>
                                 </div>
                                 <br />
+
+
                                 <div class="media-left">
                                     <i class="fa fa-facebook-official"></i>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading" >Facebook Page:</h4>
-                                    <div class="fb-page" data-href="<%# Eval("event_fb_link")  %>" data-tabs="events" data-width="320" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                                        <blockquote cite="<%# Eval("event_fb_link") %>" class="fb-xfbml-parse-ignore"><a href="<%# Eval("event_fb_link") %>">Facebook Event Page</a></blockquote>
+                                    <h4 class="media-heading">Facebook Page:</h4>
+                                    <%if (link == "")
+                                        {%><br />
+                                    No Facebook Page for this event.<%}
+                                                            else
+                                                            { %>
+                                    <div class="fb-page" data-href="<%# Eval("event_fb_link")  %>" data-tabs="events" data-width="320" 
+                                        data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                        <blockquote cite="<%# Eval("event_fb_link") %>" class="fb-xfbml-parse-ignore">
+                                            <a href="<%# Eval("event_fb_link") %>">Facebook Event Page</a></blockquote>
                                     </div>
                                 </div>
+                                <%} %>    
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <hr />
+                    <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey" />
                     <div class="media-left">
                         <i class="fa fa-pencil"></i>
                     </div>
@@ -161,13 +163,13 @@
     <br />
     <div class="container">
 
-        <div class="form-group" style="margin-top: 30px">
+        <div class="form-group" style="margin-top: 10px; margin-left: 20px">
             <asp:HiddenField ID="hiddenCount" runat="server" />
             <asp:HiddenField ID="hiddenLimit" runat="server" />
             <asp:Label runat="server" Text="Sorry. The event registration is closed." Visible="false" ID="lblClose" CssClass="highlight"></asp:Label>
             <asp:Label runat="server" Text="You have already registered for this event." Visible="false" ID="lblAdyReg" CssClass="highlight"></asp:Label>
             <asp:HiddenField ID="hiddenPurch" runat="server" />
-            <asp:Button ID="btnCheckout" runat="server" Text="Register Now" class="btn btn-primary btn-lg" OnClick="btnCheckout_Click" Style="border-bottom: 50px" />
+            <asp:Button ID="btnCheckout" runat="server" Width="200px" Text="Register Now" class="btn btn-primary btn-lg" OnClick="btnCheckout_Click" Style="border-bottom: 50px" />
         </div>
         <br />
 

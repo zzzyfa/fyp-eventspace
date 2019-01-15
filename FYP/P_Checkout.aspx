@@ -25,7 +25,7 @@
                             
                         </div>
                         <div class="form-group">
-                            <label>Expiry Date (MM/YYY):</label>
+                            <label>Expiry Date (MM/YYYY):</label>
                             <asp:TextBox ID="txtExpiry" runat="server" class="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" runat="server" ErrorMessage="This field is required." ControlToValidate="txtExpiry"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator  ForeColor="Red" ID="RegularExpressionValidator2"

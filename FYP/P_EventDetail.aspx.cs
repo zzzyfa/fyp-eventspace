@@ -26,6 +26,7 @@ namespace FYP
         public String close = "";
         DateTime today = new DateTime();
         public String url = HttpContext.Current.Request.Url.AbsoluteUri;
+        public String link = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
@@ -44,6 +45,8 @@ namespace FYP
 
                 limit = sdr["event_no_of_participants"].ToString();
                 regclose = (DateTime)sdr["event_reg_closing_date"];
+
+                link = sdr["event_fb_link"].ToString();
             }
             //for frontend
             start = startdate.ToString("ddd dd MMMM yyyy");
@@ -76,7 +79,7 @@ namespace FYP
                 lblClose.Visible = true;
                 btnCheckout.Visible = false;
             }
-
+            
             if (Session["userid"] != null)
             {
                 custID = getUserID(Session["userid"].ToString());

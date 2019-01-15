@@ -22,7 +22,7 @@
                     </div>
                 </LayoutTemplate>
                 <ItemTemplate>
-                    <h2>To <span style="color: orangered; font-weight: bold"><%#Eval("message_event_name") %></span> participants</h2><br />
+                    <h2>To <span style="color: orangered; font-weight: bold"><%#Eval("event_name") %></span> participants</h2><br />
                     <label>Sent : <%# Eval("message_timestamp") %></label><br />
                     <hr style="height: 0.7px; color: lightgrey; background-color: lightgrey; margin-bottom: 30px" />
                 </ItemTemplate>
@@ -45,7 +45,7 @@
 
                     
 
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [MESSAGES] WHERE ([message_id] = @event_id)">
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT m.message_id, m.message_body, m.message_timestamp, m.message_subject, m.message_to, m.user_id, c.event_name, c.event_id FROM MESSAGES as m INNER JOIN EVENTS_CREATED AS c ON m.event_id = c.event_id WHERE m.message_id = @event_id">
                         <SelectParameters>
                             <asp:QueryStringParameter Name="event_id" QueryStringField="id" Type="Int32" />
                         </SelectParameters>

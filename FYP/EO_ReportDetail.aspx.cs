@@ -10,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.Web.UI.DataVisualization.Charting;
+using System.Text;
 
 namespace FYP
 {
@@ -17,6 +19,8 @@ namespace FYP
     {
         public int shirt = 0;
         public int food = 0;
+
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userid"] == null)
@@ -69,13 +73,7 @@ namespace FYP
                     if (strShirt == "XXL")
                         countXXL++;
                 }
-                lblXS.Text = countXS.ToString();
-                lblS.Text = countS.ToString();
-                lblM.Text = countM.ToString();
-                lblL.Text = countL.ToString();
-                lblXL.Text = countXL.ToString();
-                lblXXL.Text = countXXL.ToString();
-
+                
                 //for food preference
                 int countV = 0;
                 int countNV = 0;
@@ -88,14 +86,27 @@ namespace FYP
                     if (strFood == "Non-vegetarian")
                         countNV++;
                 }
-                lblV.Text = countV.ToString();
-                lblNV.Text = countNV.ToString();
+
+
+
+                int[] yValuesShirt = { countXS, countS, countM, countL, countXL, countXXL };
+                string[] xValuesShirt = { "XS", "S", "M", "L", "XL", "XXL"  };
+                ChartShirt.Series["SeriesShirt"].Points.DataBindXY(xValuesShirt, yValuesShirt);
+                ChartShirt.Series["SeriesShirt"].IsValueShownAsLabel = true;
+                ChartShirt.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = 
+                    new System.Drawing.Font("Trebuchet MS", 11F, System.Drawing.FontStyle.Bold);
                 
+                int[] yValuesFood = { countV, countNV };
+                string[] xValueFood = { "Vegetarian", "Non-vegetarian"};
+                ChartFood.Series["SeriesFood"].Points.DataBindXY(xValueFood, yValuesFood);
+                ChartFood.Series["SeriesFood"].IsValueShownAsLabel = true;
+                ChartFood.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = 
+                    new System.Drawing.Font("Trebuchet MS", 11F, System.Drawing.FontStyle.Bold);
             }
         }
 
 
-
+        
 
         public void refreshdata()
         {
@@ -171,5 +182,45 @@ namespace FYP
 
 
 
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            // set the resulting file attachment name to the name of the report...
+            string fileName = "Event Sales Report";
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=" + fileName + ".csv");
+            Response.Charset = "";
+            Response.ContentType = "application/text";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            // Get the header row text form the sortable columns
+            LinkButton headerLink = new LinkButton();
+            string headerText = string.Empty;
+
+            for (int k = 0; k < GridView2.HeaderRow.Cells.Count; k++)
+            {
+                //add separator
+                headerLink = GridView2.HeaderRow.Cells[k].Controls[0] as LinkButton;
+                headerText = headerLink.Text;
+                sb.Append(headerText + ",");
+            }
+            //append new line
+            sb.Append("\r\n");
+            for (int i = 0; i < GridView2.Rows.Count; i++)
+            {
+                for (int k = 0; k < GridView2.HeaderRow.Cells.Count; k++)
+                {
+                    //add separator and strip "," values from returned content...
+
+                    sb.Append(GridView2.Rows[i].Cells[k].Text.Replace(",", "") + ",");
+                }
+                //append new line
+                sb.Append("\r\n");
+            }
+            Response.Output.Write(sb.ToString());
+            Response.Flush();
+            Response.End();
+        }
     }
 }

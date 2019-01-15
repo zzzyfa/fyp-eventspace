@@ -38,13 +38,13 @@
         </div>
         <hr style="height: 0.8px; color: lightgrey; background-color: lightgrey; margin-bottom: 30px" />
         <div class="col-sm-12 overauto">
-            <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" OnRowCommand="GridView2_RowCommand" DataSourceID="SqlDataSource1" PageSize="15">
+            <asp:GridView ID="GridView2" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" OnRowCommand="GridView2_RowCommand" DataSourceID="SqlDataSource2" PageSize="10">
                 <%--AllowSorting="true" OnSorting="gridView_Sorting" --%>
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="message_id" HeaderText="ID" SortExpression="message_id" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="message_timestamp" HeaderText="Timestamp" SortExpression="message_timestamp" HeaderStyle-Font-Underline="true" ItemStyle-Width="10%" />
-                    <asp:BoundField DataField="message_event_name" HeaderText="Event Name" SortExpression="message_event_name" HeaderStyle-Font-Underline="true" />
+                    <asp:BoundField DataField="event_name" HeaderText="Event Name" SortExpression="message_event_name" HeaderStyle-Font-Underline="true" />
                     <asp:BoundField DataField="message_subject" HeaderText="Subject" SortExpression="event_name" HeaderStyle-Font-Underline="true" ItemStyle-ForeColor="OrangeRed" ItemStyle-Width="20%" ItemStyle-Font-Bold="true" />
                     <asp:TemplateField HeaderText="Message Body">
                         <ItemTemplate>
@@ -74,7 +74,8 @@
         </div>
     </div>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [MESSAGES] WHERE ([user_id] = @user_id) ORDER BY message_id DESC">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand=
+        "SELECT m.message_id, m.message_body, m.message_timestamp, m.message_subject,  m.user_id, c.event_name, c.event_id FROM MESSAGES as m INNER JOIN EVENTS_CREATED AS c ON m.event_id = c.event_id WHERE m.user_id = @user_id ORDER BY m.message_id DESC">
         <SelectParameters>
             <asp:QueryStringParameter Name="user_id" QueryStringField="custid" Type="Decimal" />
         </SelectParameters>
